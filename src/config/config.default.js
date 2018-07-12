@@ -1,4 +1,4 @@
 export default {
   productionTip: true,
-  apiUrl: ""
+  apiBaseURL: ""
 };

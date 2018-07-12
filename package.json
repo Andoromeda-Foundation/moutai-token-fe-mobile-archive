@@ -9,6 +9,7 @@
     "commit": "commit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.5.16",
     "vue-config": "^1.0.0",
     "vue-router": "^3.0.1",
