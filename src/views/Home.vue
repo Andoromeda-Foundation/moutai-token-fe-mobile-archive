@@ -12,11 +12,16 @@
         </div>
       </div>
     </section>
+    <ItemList />
   </div>
 </template>
 
 <script>
+import ItemList from "../components/Item/ItemList";
 export default {
-  name: "Home"
+  name: "Home",
+  components: {
+    ItemList
+  }
 };
 </script>
