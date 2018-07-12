@@ -9,7 +9,22 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
+      name: "Home",
+      component: Home
+    },
+    {
+      path: "/CustomerService",
+      name: "CustomerService",
+      component: Home
+    },
+    {
+      path: "/AssetAnnouncement",
+      name: "AssetAnnouncement",
+      component: Home
+    },
+    {
+      path: "/Roadmap",
+      name: "Roadmap",
       component: Home
     },
     {
