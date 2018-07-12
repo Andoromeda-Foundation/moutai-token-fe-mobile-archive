@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import NotFound from "./views/NotFound";
+import Login from "./views/Login.vue";
+import Regitered from "./views/Registered.vue";
 
 Vue.use(Router);
 
@@ -31,6 +33,16 @@ export default new Router({
       path: "/404",
       name: "NotFound",
       component: NotFound
+    },
+    {
+      path: "/Login",
+      name: "Login",
+      component: Login
+    },
+    {
+      path: "/Regitered",
+      name: "Registered",
+      component: Regitered
     }
   ]
 });
