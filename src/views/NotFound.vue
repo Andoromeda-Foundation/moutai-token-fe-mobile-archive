@@ -1,11 +1,11 @@
 <template>
-  <div class="Home-view">
-    Home View
+  <div class="NotFound-view">
+    NotFound View
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home"
+  name: "NotFound"
 };
 </script>
