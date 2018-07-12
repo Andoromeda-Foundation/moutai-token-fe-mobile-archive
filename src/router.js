@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import NotFound from "./views/NotFound";
 import Login from "./views/Login.vue";
 import Regitered from "./views/Registered.vue";
+import Detail from "./views/Detail.vue";
 
 Vue.use(Router);
 
@@ -43,6 +44,11 @@ export default new Router({
       path: "/Regitered",
       name: "Registered",
       component: Regitered
+    },
+    {
+      path: "/Detail",
+      name: "Detail",
+      component: Detail
     }
   ]
 });
