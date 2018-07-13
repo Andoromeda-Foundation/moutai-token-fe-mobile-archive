@@ -4,7 +4,10 @@ import router from "./router";
 import store from "./store";
 import config from "@/config";
 import vueConfig from "vue-config";
+import MintUI from "mint-ui";
+import "mint-ui/lib/style.css";
 
+Vue.use(MintUI);
 Vue.use(vueConfig, config);
 
 Vue.config.productionTip = config.productionTip;
