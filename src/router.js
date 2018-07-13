@@ -7,6 +7,7 @@ import Regitered from "./views/Registered.vue";
 import Detail from "./views/Detail.vue";
 import User from "./views/User.vue";
 import UserAssets from "./views/UserAssets.vue";
+import Transfer from "./views/Transfer.vue";
 
 Vue.use(Router);
 
@@ -61,6 +62,11 @@ export default new Router({
       path: "/UserAssets",
       name: "UserAssets",
       component: UserAssets
+    },
+    {
+      path: "/Transfer",
+      name: "Transfer",
+      component: Transfer
     }
   ]
 });
