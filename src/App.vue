@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <!-- <Header /> -->
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="tab-container1">
         <router-view/>
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default {
   name: "App",
   components: {
-    Header,
+    // Header,
     Footer
   },
   data() {
