@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import "bulma";
 // import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 

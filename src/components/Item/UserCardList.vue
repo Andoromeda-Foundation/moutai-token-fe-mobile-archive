@@ -1,8 +1,8 @@
 <template>
-    <div id="item-list" >
+    <div id="user-card-list" >
         <div class="columns" v-for="(row,idx) in rows" :key="idx">
             <div class="column" v-for="good in row" :key="good.tokenId">
-                <item-card v-bind="good" /> 
+                <user-card v-bind="good" /> 
             </div>
         </div>
     </div>
@@ -10,13 +10,13 @@
 
 <script>
 import { splitEvery } from "ramda";
-import ItemCard from "./ItemCard";
+import UserCard from "./UserCard";
 
 export default {
   components: {
-    ItemCard
+    UserCard
   },
-  name: "ItemList",
+  name: "UserCardList",
   computed: {
     rows() {
       return splitEvery(4, this.goods);

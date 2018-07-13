@@ -5,6 +5,8 @@ import NotFound from "./views/NotFound";
 import Login from "./views/Login.vue";
 import Regitered from "./views/Registered.vue";
 import Detail from "./views/Detail.vue";
+import User from "./views/User.vue";
+import UserAssets from "./views/UserAssets.vue";
 
 Vue.use(Router);
 
@@ -49,6 +51,16 @@ export default new Router({
       path: "/Detail",
       name: "Detail",
       component: Detail
+    },
+    {
+      path: "/User",
+      name: "User",
+      component: User
+    },
+    {
+      path: "/UserAssets",
+      name: "UserAssets",
+      component: UserAssets
     }
   ]
 });
