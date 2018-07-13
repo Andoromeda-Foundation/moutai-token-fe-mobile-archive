@@ -1,7 +1,17 @@
 <template>
   <div id="app">
     <Header />
-    <router-view/>
+    <mt-tab-container v-model="active">
+      <mt-tab-container-item id="tab-container1">
+        <router-view/>
+  </mt-tab-container-item>
+  <mt-tab-container-item id="tab-container2">
+    <mt-cell v-for="n in 5" :key="n" title="tab-container 2"></mt-cell>
+  </mt-tab-container-item>
+  <mt-tab-container-item id="tab-container3">
+    <mt-cell v-for="n in 7" :key="n" title="tab-container 3"></mt-cell>
+  </mt-tab-container-item>
+    </mt-tab-container>
     <Footer />
   </div>
 </template>
@@ -15,6 +25,11 @@ export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      active: "tab-container1"
+    };
   }
 };
 </script>
