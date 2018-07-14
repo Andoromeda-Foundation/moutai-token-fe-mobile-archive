@@ -11,7 +11,8 @@
 <script>
 import { splitEvery } from "ramda";
 import UserCard from "./UserCard";
-
+import {mapGetters} from "vuex";
+import config from "../../api/service.js"
 export default {
   components: {
     UserCard
@@ -22,6 +23,7 @@ export default {
       return splitEvery(4, this.goods);
     }
   },
+
   data: () => ({
     goods: [
       // {
@@ -75,8 +77,10 @@ export default {
     ]
   }),
   created() {
-    this.$http.get('http://47.75.74.227:8080/api//user/spirits', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+      let thiz = this;
+//    this.$http.get('http://47.75.74.227:8080/api//user/spirits',
+      this.$http.get(`${config.baseUrl.production}/user/spirits`,
+          {headers: {'token': thiz.token}})
     .then(response => {
       console.log(response.body)
       this.goods = response.body.result || [];

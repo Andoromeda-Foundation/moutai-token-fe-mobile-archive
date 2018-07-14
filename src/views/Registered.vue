@@ -77,10 +77,10 @@ export default {
     };
     return {
       user: {
-        phone: "13823703373",
+        phone: "",
         valificationCode: "1234",
-        name: "Dawn3",
-        invitationCode: "1234"
+        name: "",
+        invitationCode: "."
       },
       rules2: {
         phone: [{ validator: validatePhone, trigger: "blur" }],
