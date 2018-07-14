@@ -36,6 +36,7 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex"
 export default {
   name: "User",
   data() {
@@ -45,12 +46,18 @@ export default {
       assetPrice: 0
     };
   },
+    computed:{
+        ...mapGetters({
+            token: "getToken"
+        })
+    },
   methods: {
 
   },
   created(){
+      let thiz = this;
     this.$http.get('http://47.75.74.227:8080/api/user', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+      {headers: {'token': thiz.token}})//'eb8f7736127b3af7ab12558a74cc5c50'
     .then(response => {
         const results = response.body.result;
         this.nickname = results.nickname;
