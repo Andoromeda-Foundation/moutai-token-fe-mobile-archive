@@ -48,20 +48,20 @@ export default {
       tabsParam: ["全部", "买入", "卖出"],
       nowIndex: "全部",
       list: [
-        {
-          img:
-            "https://ws2.sinaimg.cn/large/006tKfTcgy1ft7ak20qkoj30go0f2aag.jpg",
-          name: "2012飞天茅台",
-          type: "买入",
-          money: 10000
-        },
-        {
-          img:
-            "https://ws3.sinaimg.cn/large/006tKfTcgy1ft7ajz8j0tj306404lq2s.jpg",
-          name: "2013飞天茅台",
-          type: "卖出",
-          money: 20000
-        }
+        // {
+        //   img:
+        //     "https://ws2.sinaimg.cn/large/006tKfTcgy1ft7ak20qkoj30go0f2aag.jpg",
+        //   name: "2012飞天茅台",
+        //   type: "买入",
+        //   money: 10000
+        // },
+        // {
+        //   img:
+        //     "https://ws3.sinaimg.cn/large/006tKfTcgy1ft7ajz8j0tj306404lq2s.jpg",
+        //   name: "2013飞天茅台",
+        //   type: "卖出",
+        //   money: 20000
+        // }
       ]
     };
   },
@@ -88,6 +88,16 @@ export default {
         return "⬇";
       }
     }
+  },
+  created() {
+    this.$http.get('http://47.75.74.227:8080/api//user/trades', 
+      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    .then(response => {
+      console.log(response.body)
+      this.list = response.body.result || [];
+    }, response => {
+      // error callback
+    });
   }
 };
 </script>

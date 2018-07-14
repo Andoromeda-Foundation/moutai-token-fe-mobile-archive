@@ -1,6 +1,5 @@
 <template>
   <div class="User-view">
-
     <section>
       <div class="userstatu content">
           <div class="content">
@@ -47,21 +46,24 @@ export default {
     };
   },
   methods: {
-//       getassets: function(){
-//         console.log(this)
-//           this.$http.get('http://47.75.74.227:8080/api/users/1')
-//             .then((response) => {
-//               const res = response.body.result;
-//               console.log(response);
-//             });
-//     }},
-//   created(){
-//       this.getassets();
+
+  },
+  created(){
+    this.$http.get('http://47.75.74.227:8080/api/user', 
+      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    .then(response => {
+        const results = response.body.result;
+        this.nickname = results.nickname;
+        this.assetCount = results.assetCount;
+        this.assetPrice = results.assetValue;
+    }, response => {
+      // error callback
+    });
   }
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .userstatu {
   padding-left: 0px;
   padding-top: 35px;
