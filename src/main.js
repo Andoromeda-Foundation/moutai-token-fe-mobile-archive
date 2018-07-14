@@ -6,9 +6,11 @@ import config from "@/config";
 import vueConfig from "vue-config";
 import MintUI from "mint-ui";
 import "mint-ui/lib/style.css";
+import VueResource from 'vue-resource';
 
 Vue.use(MintUI);
 Vue.use(vueConfig, config);
+Vue.use(VueResource);
 
 Vue.config.productionTip = config.productionTip;
 

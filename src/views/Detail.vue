@@ -190,6 +190,22 @@ export default {
       1
     ]
   }),
+  created() {
+    this.$http.get('http://47.75.74.227:8080/api/user', 
+      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    .then(response => {
+      console.log(response.body)
+    }, response => {
+      // error callback
+    });
+
+      // const formData = new FormData();
+      // formData.append('address', this.address);
+      // this.$http.post(this.$store.getters.getServerURL+'addrankshuihunas.php', formData)
+      //   .then((response) => {
+      //     const res = response.body;
+      //   });
+  },
   methods: {
     // onTabClicked(index) {
     //   this.tabindex = index;
