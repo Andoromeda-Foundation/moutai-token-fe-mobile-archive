@@ -19,11 +19,26 @@
     </div>
   </div>
   <div class="media-right" style="padding-right:5px">
-    <div style="font-size:10px;color:#3EC170">3天后可提货</div>
+    <!-- <div style="font-size:10px;color:#3EC170">3天后可提货</div> -->
     <div style="padding-top:10px">
-      <div class="button is-info is-rounded is-small is-outlined">转让</div>
+      <a class="button is-info is-rounded is-small is-outlined"
+        @click.native="gethref()">
+        转让
+      </a>
     </div>
   </div>
 </article>
 </div>
 </template>
+<script>
+export default {
+  methods: {
+    gethref(){
+      console.log("ss"+this.props)
+      const href = "/#/Transfer/"+this.props.id;;
+      window.location.href = href;
+      // return 
+    }
+  }
+}
+</script>

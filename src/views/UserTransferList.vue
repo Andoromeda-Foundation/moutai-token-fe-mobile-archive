@@ -21,7 +21,7 @@
                 <img :src="item.img" width="36" height="36">
               </span>
               <span style="margin-left:30px;" class="smallgreen">{{item.type}}</span>
-              <span style="margin-left:30px;" class="price">{{item.money}}</span>
+              <span style="margin-left:30px;" class="price">{{item.amount}}</span>
             </mt-cell>
             <div class="columns is-mobile">
                 <div class="column is-one-third">
