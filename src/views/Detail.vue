@@ -29,7 +29,7 @@
           <div class="field">
             <mt-button class="button" type="default">主页</mt-button>
             <mt-button class="button" type="default">客服</mt-button>
-            <mt-button class="button" type="danger">立即认购</mt-button>
+            <mt-button class="button" type="danger" @click="buySake()">立即认购</mt-button>
           </div>
           <div style="width: 100%; height: 50px;"></div>
       </mt-tab-container-item>
@@ -41,11 +41,15 @@
       <mt-tab-container-item id="3" class="detaildiv tabheight">
           <p>交易历史</p>
           <br>
-          <mt-cell class="cell" v-for="item in transList" :title="sakeinfo.title" label="XXX02 → 白酒银行     2017/07/01 07:09">
-            <span>转让     ¥{{ transList.amount }}.00</span>
+          <div class="cell" v-for="item in transList">
             <img slot="icon" src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" width="30" height="30">
-          </mt-cell>
-          <!-- <div class="lineslim"></div> -->
+            <span class="content">{{ sakeinfo.title }}</span>
+            <br>
+            <span class="content">{{ item.fromUser.nickname }} → {{ item.toUser.nickname }} {{ item.updatedAt }}</span>
+            <br>
+            <span class="content">转让 ¥{{ item.price }}.00</span>
+          </div>
+          <div class="lineslim"></div>
       </mt-tab-container-item>
       
       <mt-tab-container-item id="4" class="detaildiv tabheight">
@@ -86,6 +90,7 @@
 <script>
 import config from "../api/service";
 import { mapGetters } from 'vuex';
+import { Toast } from 'mint-ui';
 
 export default {
   name: "Detail",
@@ -101,7 +106,7 @@ export default {
     ...mapGetters({token: 'getToken'})
   },
   created() {
-    // console.log(this.$route.params.id)
+    console.log(this.token)
 
     this.$http.get(`${config.baseUrl.production}/spirits/${this.$route.params.id}`, 
       {headers: {'token': this.token}})
@@ -116,24 +121,26 @@ export default {
       {headers: {'token': this.token}})
     .then(response => {
       if(response.body.statusCode == 200) {
-        // this.transList = response.body.result;
+        this.transList = response.body.result;
       }
     });
-
-      const formData = new FormData();
-      formData.append('price', '1200');
+  },
+  methods: {
+    buySake(index) {
+      const jsonData = {"price" : this.sakeinfo.nextPrice};
       this.$http.post(`${config.baseUrl.production}/spirits/${this.$route.params.id}/buy`, 
-        formData, 
+        jsonData, 
         {headers: {'token': this.token}})
       .then((response) => {
           const res = response.body;
           console.log(res);
-        });
-  },
-  methods: {
-    // onTabClicked(index) {
-    //   this.tabindex = index;
-    // }
+          if(response.body.statusCode == 200) {
+            Toast("购买成功");
+          }else if(response.body.statusCode == 500 || response.body.statusCode == 401) {
+            Toast(response.body.message);
+          }
+      });
+    }
   }
 };
 </script>
