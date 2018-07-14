@@ -36,7 +36,8 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex"
+    import {mapGetters} from "vuex";
+    import config from "../api/service.js"
 export default {
   name: "User",
   data() {
@@ -56,7 +57,7 @@ export default {
   },
   created(){
       let thiz = this;
-    this.$http.get('http://47.75.74.227:8080/api/user', 
+    this.$http.get(`${config.baseUrl.production}/user`,
       {headers: {'token': thiz.token}})//'eb8f7736127b3af7ab12558a74cc5c50'
     .then(response => {
         const results = response.body.result;
