@@ -1,8 +1,8 @@
 <template>
     <div id="item-list" >
         <div class="columns" v-for="(row,idx) in rows" :key="idx">
-            <div class="column" v-for="good in row" :key="good.tokenId">
-                <item-card v-bind="good" /> 
+            <div class="column" v-for="good in row" :key="good.tokenId" @click="gotoDetail(good)">
+                <item-card v-bind="good"/> 
             </div>
         </div>
     </div>
@@ -37,6 +37,11 @@ export default {
     }
     console.error(data)
     this.goods = body.result;
+  },
+  methods: {
+    gotoDetail(info) {
+      this.$router.push({ path: `/detail/${info.id}`});
+    }
   },
   data: () => ({
     goods: [
