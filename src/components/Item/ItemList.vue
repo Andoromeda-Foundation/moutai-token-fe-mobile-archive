@@ -12,7 +12,7 @@
 import config from "../../api/service";
 import { splitEvery } from "ramda";
 import ItemCard from "./ItemCard";
-
+import {mapGetters} from "vuex"
 export default {
   components: {
     ItemCard
@@ -21,14 +21,21 @@ export default {
   computed: {
     rows() {
       return splitEvery(4, this.goods);
-    }
+    },
+      ...mapGetters({
+          token: "getToken"
+      })
   },
   async created() {
+      let thiz = this;
     const { body } = await this.$http.get(
-      // "http://47.75.74.227:8080/api/spirits",
-      `${config.baseUrl.production}/spirits`,
-      { headers: { token: "eb8f7736127b3af7ab12558a74cc5c50" } }
+      `${config.baseUrl.production}/spirits`
     );
+    var data = body.result;
+    for(var item in data){
+        data[item].coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data[item].coverFileDownloadUrl;
+    }
+    console.error(data)
     this.goods = body.result;
   },
   data: () => ({

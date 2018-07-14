@@ -1,6 +1,6 @@
 <template functional>
 <div class="card">
-  <div class="card-image">
+  <div class="card-image" style="margin-top: 1rem">
     <figure class="image is-4by4">
       <img :src="props.coverFileDownloadUrl" alt="商品" class="item-img">
     </figure>
