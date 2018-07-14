@@ -12,11 +12,11 @@
                 <mt-badge @click.native="getValificationCode" size="small" color="#F5F5F5"  :disabled="editFlag" style="color: #3F51B5">{{valificationText}}</mt-badge>
             </mt-field>
             <mt-button class="btn" @click.native="submitForm">登录</mt-button>
-            <a>
-                <router-link :to="{name: 'Registered'}">
-                    没有账号去注册
+            <div  class="linkcss">
+                <router-link :to="{name: 'Registered'}" style="text-decoration: none">
+                   <span>没有账号去注册</span>
                 </router-link>
-            </a>
+            </div>
           <!--  <el-form :model="user"  status-icon :rules="rules2" ref="user" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="+86：" prop="phone">
                     <el-input  v-model="user.phone" auto-complete="off" placeholder="请输入手机号码"></el-input>
@@ -169,7 +169,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .content {
   width: 100%;
   display: flex;
@@ -191,5 +191,11 @@ export default {
   color: white;
   background-color: #3f51b5;
   margin-top: 20px;
+}
+.linkcss {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
 }
 </style>
