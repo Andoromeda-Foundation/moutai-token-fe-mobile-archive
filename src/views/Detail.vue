@@ -91,7 +91,6 @@
 import config from "../api/service";
 import { mapGetters } from 'vuex';
 import { Toast } from 'mint-ui';
-
 export default {
   name: "Detail",
   data: () => ({
@@ -106,13 +105,13 @@ export default {
     ...mapGetters({token: 'getToken'})
   },
   created() {
-    console.log(this.token)
-
     this.$http.get(`${config.baseUrl.production}/spirits/${this.$route.params.id}`, 
       {headers: {'token': this.token}})
     .then(response => {
       if(response.body.statusCode == 200) {
-        this.sakeinfo = response.body.result;
+          var data = response.body.result;
+          data.coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data.coverFileDownloadUrl;
+        this.sakeinfo = data;
         this.sakeinfoowner = this.sakeinfo.user;
       }
     });
