@@ -2,8 +2,8 @@
 <div class="card">
   <div class="card-image" style="margin-top: 1rem">
     <figure class="image is-4by4">
-      <!-- <img :src="props.coverFileDownloadUrl" alt="商品" class="item-img"> -->
-      <img src="https://ws3.sinaimg.cn/large/006tKfTcgy1ft7ajz8j0tj306404lq2s.jpg" alt="商品" class="item-img">
+       <img :src="props.coverFileDownloadUrl" alt="商品" class="item-img">
+      <!--<img src="https://ws3.sinaimg.cn/large/006tKfTcgy1ft7ajz8j0tj306404lq2s.jpg" alt="商品" class="item-img">-->
     </figure>
   </div>
   <div class="card-content">
