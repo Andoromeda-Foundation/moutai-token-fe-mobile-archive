@@ -1,5 +1,5 @@
 <template functional>
-<div class="card">
+<div class="card"  @click.native="buy">
   <div class="card-image" style="margin-top: 1rem">
     <figure class="image is-4by4">
        <img :src="props.coverFileDownloadUrl" alt="商品" class="item-img">
@@ -17,7 +17,20 @@
   </div>
 </div>
 </template>
+<script>
+  export default{
+      data(){
+          return{
 
+          }
+      },
+      methods:{
+          buy(){
+            alert("ddd")
+          }
+      }
+  }
+</script>
 <style scoped>
 .title {
   font-size: 1rem;

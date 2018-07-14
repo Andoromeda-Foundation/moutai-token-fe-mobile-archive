@@ -1,7 +1,7 @@
 <template>
     <div id="user-card-list" >
         <div class="columns" v-for="(row,idx) in rows" :key="idx">
-            <div class="column" v-for="good in row" :key="good.tokenId">
+            <div class="column" v-for="good in row" :key="good.tokenId" @click="Transfer(good)">
                 <user-card v-bind="good" /> 
             </div>
         </div>
@@ -23,7 +23,11 @@ export default {
       return splitEvery(4, this.goods);
     }
   },
-
+ methods:{
+     Transfer(good){
+           this.$router.push({path:`/Transfer/${good.id}`})
+      }
+ },
   data: () => ({
     goods: [
       {
@@ -31,7 +35,11 @@ export default {
       "title": "string",
       "status": "string",
       "coverFile": "string",
-      "coverFileDownloadUrl": "string",
+      coverFileDownloadUrl: "https://ws3.sinaimg.cn/large/006tKfTcgy1ft7ajz8j0tj306404lq2s.jpg",
+          name: "茅台",
+          owner: "Dawn",
+          price: "10000",
+          tokenId: "1",
       "brand": "string",
       "region": "string",
       "time": 0,

@@ -21,7 +21,7 @@ export default new Router({
       name: "Home",
       component: Home
     },
-    {
+  /*  {
       path: "/CustomerService",
       name: "CustomerService",
       component: Home
@@ -35,7 +35,7 @@ export default new Router({
       path: "/Roadmap",
       name: "Roadmap",
       component: Home
-    },
+    },*/
     {
       path: "/404",
       name: "NotFound",

@@ -70,7 +70,7 @@ export default {
     };
     return {
       user: {
-        phone: "",
+        phone: "13823703379",
         valificationCode: "1234"
       },
       rules2: {

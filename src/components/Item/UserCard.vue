@@ -3,7 +3,7 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <img :src="props.img" >
+      <img :src="props.coverFileDownloadUrl" >
     </p>
   </figure>
   <div class="media-content">
@@ -21,7 +21,7 @@
   <div class="media-right" style="padding-right:5px">
     <!-- <div style="font-size:10px;color:#3EC170">3天后可提货</div> -->
     <div style="padding-top:10px">
-      <a class="button is-info is-rounded is-small is-outlined" @click.native="gethref()">
+      <a class="button is-info is-rounded is-small is-outlined">
         转让
       </a>
     </div>
@@ -29,15 +29,3 @@
 </article>
 </div>
 </template>
-<script>
-export default {
-  methods: {
-    gethref(){
-      console.log("ss"+this.props)
-      const href = "/#/Transfer/"+this.props.id;;
-      window.location.href = href;
-      // return 
-    }
-  }
-}
-</script>
