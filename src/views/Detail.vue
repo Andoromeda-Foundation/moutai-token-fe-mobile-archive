@@ -39,6 +39,7 @@
 
       <mt-tab-container-item id="3" class="detaildiv tabheight">
           <p>交易历史</p>
+          <br>
           <mt-cell class="cell" v-for="item in transList" title="飞天茅台" label="XXX02 → 白酒银行     2017/07/01 07:09">
             <span>转让     ¥2100.00</span>
             <img slot="icon" src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" width="30" height="30">
@@ -189,6 +190,22 @@ export default {
       1
     ]
   }),
+  created() {
+    this.$http.get('http://47.75.74.227:8080/api/user', 
+      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    .then(response => {
+      console.log(response.body)
+    }, response => {
+      // error callback
+    });
+
+      // const formData = new FormData();
+      // formData.append('address', this.address);
+      // this.$http.post(this.$store.getters.getServerURL+'addrankshuihunas.php', formData)
+      //   .then((response) => {
+      //     const res = response.body;
+      //   });
+  },
   methods: {
     // onTabClicked(index) {
     //   this.tabindex = index;
@@ -210,11 +227,11 @@ export default {
   background:#e7e7e7;
 }
 .detail {
-  font-size: 10px;
+  font-size: 14px;
   color: #aaa;
 }
 .content {
-  font-size: 10px;
+  font-size: 14px;
   color: #000;
 }
 .field {
