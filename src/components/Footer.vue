@@ -1,6 +1,7 @@
 <template>
   <div class="footer">
-    <mt-tabbar v-model="selected" fixed="true">
+    <mt-tabbar v-model="selected"
+    :fixed="true">
       <mt-tab-item id="主页">
         <img slot="icon" src="https://i.loli.net/2018/07/13/5b48270e7ccc7.png">
         主页
