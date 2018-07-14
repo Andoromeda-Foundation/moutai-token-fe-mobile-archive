@@ -19,6 +19,7 @@
 <script>
 import "bulma";
 // import Header from "@/components/Header";
+import "../node_modules/mint-ui/lib/style.css";
 import Footer from "@/components/Footer";
 
 export default {
