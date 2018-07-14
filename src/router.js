@@ -7,6 +7,10 @@ import Regitered from "./views/Registered.vue";
 import Detail from "./views/Detail.vue";
 import User from "./views/User.vue";
 import UserAssets from "./views/UserAssets.vue";
+import Transfer from "./views/Transfer.vue";
+import UserTransferList from "./views/UserTransferList.vue";
+import UserWallet from "./views/UserWallet.vue";
+import Withdraw from "./views/Withdraw.vue";
 
 Vue.use(Router);
 
@@ -61,6 +65,26 @@ export default new Router({
       path: "/UserAssets",
       name: "UserAssets",
       component: UserAssets
+    },
+    {
+      path: "/Transfer",
+      name: "Transfer",
+      component: Transfer
+    },
+    {
+      path: "/UserTransferList",
+      name: "UserTransferList",
+      component: UserTransferList
+    },
+    {
+      path: "/UserWallet",
+      name: "UserWallet",
+      component: UserWallet
+    },
+    {
+      path: "/Withdraw",
+      name: "Withdraw",
+      component: Withdraw
     }
   ]
 });
