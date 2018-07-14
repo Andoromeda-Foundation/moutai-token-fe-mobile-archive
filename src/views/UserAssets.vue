@@ -8,7 +8,7 @@
         			v-for="item in tabsParam" :key="item"
                     :class="getclass(item)"
         			@click="toggleTabs">
-					<a href="#" data-toggle="tab">
+					<a data-toggle="tab">
             			{{item}}
         			</a>
 				</li>

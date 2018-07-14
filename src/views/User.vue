@@ -5,17 +5,17 @@
       <div class="userstatu content">
           <div class="content">
             <img class="image is-48x48" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            <span class="title is-6 name">{{name}}</span>
+            <span class="title is-6 name">{{nickname}}</span>
           </div>
           <div class="maindiv">
             <div class="leftdiv has-text-centered">
-                <div>{{amount}}</div>
+                <div>{{assetCount}}</div>
                 <div>资产数量</div>
             </div>
             <div class="centerdiv">
             </div>
             <div class="rightdiv has-text-centered">
-                <div>{{allprice}}</div>
+                <div>{{assetPrice}}</div>
                 <div>总资产估值</div>
             </div>
           </div>
@@ -41,12 +41,23 @@ export default {
   name: "User",
   data() {
     return {
-      name: "岑夫子",
-      amount: 5,
-      allprice: 10000
+      nickname: "name",
+      assetCount: 0,
+      assetPrice: 0
     };
   },
-  methods: {}
+  methods: {
+//       getassets: function(){
+//         console.log(this)
+//           this.$http.get('http://47.75.74.227:8080/api/users/1')
+//             .then((response) => {
+//               const res = response.body.result;
+//               console.log(response);
+//             });
+//     }},
+//   created(){
+//       this.getassets();
+//   }
 };
 </script>
 
