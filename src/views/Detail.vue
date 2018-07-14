@@ -12,11 +12,11 @@
     <!-- tab-container -->
     <mt-tab-container v-model="tabindex">
       <mt-tab-container-item id="1">
-          <img src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" width="100%" />
+          <img :src="sakeinfo.coverFileDownloadUrl" width="100%" />
           <div class="detaildiv">
             <p class="title is-6 price">¥ {{ sakeinfo.nextPrice }}.00</p>
             <p class="title is-6">{{ sakeinfo.title }}</p>
-            <p class="detail">拥有者：{{ sakeinfo.user.nickname }}</p>
+            <p class="detail">拥有者：{{ sakeinfoowner.nickname }}</p>
             <p class="detail">解锁时间：{{ sakeinfo.freezeTo }}</p>
           </div>
           <div class="line"></div>
@@ -84,6 +84,9 @@
 </template>
 
 <script>
+import config from "../api/service";
+import { mapGetters } from 'vuex';
+
 export default {
   name: "Detail",
   data: () => ({
@@ -91,30 +94,41 @@ export default {
     transList: [],
     commitList: [],
     newsList: [],
-    sakeinfo:{}
+    sakeinfo:{},
+    sakeinfoowner:{}
   }),
+  computed: {
+    ...mapGetters({token: 'getToken'})
+  },
   created() {
-    this.$http.get('http://47.75.74.227:8080/api/spirits/1', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    // console.log(this.$route.params.id)
+
+    this.$http.get(`${config.baseUrl.production}/spirits/${this.$route.params.id}`, 
+      {headers: {'token': this.token}})
     .then(response => {
       if(response.body.statusCode == 200) {
         this.sakeinfo = response.body.result;
+        this.sakeinfoowner = this.sakeinfo.user;
       }
     });
 
-    this.$http.get('http://47.75.74.227:8080/api/spirits/1/trades', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    this.$http.get(`${config.baseUrl.production}/spirits/${this.$route.params.id}/trades`, 
+      {headers: {'token': this.token}})
     .then(response => {
       if(response.body.statusCode == 200) {
         // this.transList = response.body.result;
       }
     });
-      // const formData = new FormData();
-      // formData.append('address', this.address);
-      // this.$http.post(this.$store.getters.getServerURL+'addrankshuihunas.php', formData)
-      //   .then((response) => {
-      //     const res = response.body;
-      //   });
+
+      const formData = new FormData();
+      formData.append('price', '1200');
+      this.$http.post(`${config.baseUrl.production}/spirits/${this.$route.params.id}/buy`, 
+        formData, 
+        {headers: {'token': this.token}})
+      .then((response) => {
+          const res = response.body;
+          console.log(res);
+        });
   },
   methods: {
     // onTabClicked(index) {

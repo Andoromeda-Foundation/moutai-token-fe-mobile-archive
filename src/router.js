@@ -52,7 +52,7 @@ export default new Router({
       component: Regitered
     },
     {
-      path: "/Detail",
+      path: "/Detail/:id",
       name: "Detail",
       component: Detail
     },
