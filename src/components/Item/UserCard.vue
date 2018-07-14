@@ -21,8 +21,7 @@
   <div class="media-right" style="padding-right:5px">
     <!-- <div style="font-size:10px;color:#3EC170">3天后可提货</div> -->
     <div style="padding-top:10px">
-      <a class="button is-info is-rounded is-small is-outlined"
-        @click.native="gethref()">
+      <a class="button is-info is-rounded is-small is-outlined" @click.native="gethref()">
         转让
       </a>
     </div>

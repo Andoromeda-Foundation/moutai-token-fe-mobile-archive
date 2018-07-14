@@ -28,6 +28,9 @@
       <mt-cell title="钱包" to="UserWallet" is-link>
           <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
       </mt-cell>
+        <mt-cell title="安全退出" @click.native="Logout()">
+            <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
+        </mt-cell>
       <div>
 	</div>
     </section>
@@ -38,8 +41,10 @@
 <script>
     import {mapGetters} from "vuex";
     import config from "../api/service.js"
+    import MtCell from "../../node_modules/mint-ui/packages/cell/src/cell";
 export default {
-  name: "User",
+    components: {MtCell},
+    name: "User",
   data() {
     return {
       nickname: "name",
@@ -53,7 +58,10 @@ export default {
         })
     },
   methods: {
-
+    Logout(){
+        this.$store.commit("updateToken","");
+        this.$router.push("/");
+    }
   },
   created(){
       let thiz = this;
