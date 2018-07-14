@@ -4,6 +4,14 @@
     title="每一瓶酒，都在成长"
     subtitle="认购、存托和交易您的白酒。" 
     desc="0手续费。" />
+    <mt-header style=" background: #FFFFFF; color: #333;" >
+      <mt-button slot="left">
+       最近交易
+        </mt-button>
+      <mt-button slot="right">
+        <router-link :to="{name: 'UserAssets'}">查看更多</router-link>
+        </mt-button>
+    </mt-header>
     <ItemList />
   </div>
 </template>
