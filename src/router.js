@@ -67,7 +67,7 @@ export default new Router({
       component: UserAssets
     },
     {
-      path: "/Transfer",
+      path: '/Transfer/:id',
       name: "Transfer",
       component: Transfer
     },
