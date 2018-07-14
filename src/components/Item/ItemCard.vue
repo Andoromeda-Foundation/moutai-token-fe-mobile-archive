@@ -2,19 +2,14 @@
 <div class="card">
   <div class="card-image">
     <figure class="image is-4by4">
-      <img :src="props.img" alt="商品" class="item-img">
+      <img :src="props.coverFileDownloadUrl" alt="商品" class="item-img">
     </figure>
   </div>
   <div class="card-content">
     <div class="media">
-      <!-- <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-        </figure>
-      </div> -->
       <div class="media-content">
-        <p class="title is-4">{{props.name}}</p>
-        <span class="subtitle">拥有者： {{props.owner}}</span>
+        <p class="title is-4">{{props.title}}</p>
+        <span class="subtitle">拥有者： {{props.user.nickname}}</span>
         <span class="subtitle pickup" >3 天后提货</span>
       </div>
     </div>

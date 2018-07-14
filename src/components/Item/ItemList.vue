@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import config from "../../api/service";
 import { splitEvery } from "ramda";
 import ItemCard from "./ItemCard";
 
@@ -21,6 +22,14 @@ export default {
     rows() {
       return splitEvery(4, this.goods);
     }
+  },
+  async created() {
+    const { body } = await this.$http.get(
+      // "http://47.75.74.227:8080/api/spirits",
+      `${config.baseUrl.production}/spirits`,
+      { headers: { token: "eb8f7736127b3af7ab12558a74cc5c50" } }
+    );
+    this.goods = body.result;
   },
   data: () => ({
     goods: [
