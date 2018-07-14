@@ -82,4 +82,9 @@ export default {
   max-width: 90%;
   margin: 0 auto;
 }
+.column {
+  width: 50%;
+  padding: 0.25rem;
+  float: left;
+}
 </style>
