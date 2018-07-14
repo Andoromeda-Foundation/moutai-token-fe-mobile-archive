@@ -25,6 +25,7 @@
 }
 .hero .title {
   font-size: 2rem;
+  color: #fafafa;
   font-weight: 600;
 }
 .hero .subtitle {
