@@ -3,10 +3,10 @@
 
     <mt-navbar v-model="tabindex">
       <mt-tab-item id="1">商品</mt-tab-item>
-      <mt-tab-item id="2">价格趋势</mt-tab-item>
+<!--       <mt-tab-item id="2">价格趋势</mt-tab-item> -->
       <mt-tab-item id="3">交易历史</mt-tab-item>
-      <mt-tab-item id="4">讨论区</mt-tab-item>
-      <mt-tab-item id="5">新闻</mt-tab-item>
+<!--       <mt-tab-item id="4">讨论区</mt-tab-item>
+      <mt-tab-item id="5">新闻</mt-tab-item> -->
     </mt-navbar>
 
     <!-- tab-container -->
@@ -14,16 +14,17 @@
       <mt-tab-container-item id="1">
           <img src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" width="100%" />
           <div class="detaildiv">
-            <p class="title is-6 price">¥ 2100.00</p>
-            <p class="title is-6">贵州茅台吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦</p>
-            <p class="detail">拥有者：张三     解锁时间：12天12时00分00秒</p>
+            <p class="title is-6 price">¥ {{ sakeinfo.nextPrice }}.00</p>
+            <p class="title is-6">{{ sakeinfo.title }}</p>
+            <p class="detail">拥有者：{{ sakeinfo.user.nickname }}</p>
+            <p class="detail">解锁时间：{{ sakeinfo.freezeTo }}</p>
           </div>
           <div class="line"></div>
           <div class="detaildiv">
-            <p><a class="detail">品牌：</a><a class="content">茅台</a></p>
-            <p><a class="detail">年份：</a><a class="content">2000</a></p>
-            <p><a class="detail">度数：</a><a class="content">50%vol</a></p>
-            <p><a class="detail">规格：</a><a class="content">500ml</a></p>
+            <p><a class="detail">品牌：</a><a class="content">{{ sakeinfo.brand }}</a></p>
+            <p><a class="detail">年份：</a><a class="content">{{ sakeinfo.time }}</a></p>
+            <p><a class="detail">度数：</a><a class="content">{{ sakeinfo.degree }}%vol</a></p>
+            <p><a class="detail">规格：</a><a class="content">{{ sakeinfo.specification }}ml</a></p>
           </div>
           <div class="field">
             <mt-button class="button" type="default">主页</mt-button>
@@ -40,8 +41,8 @@
       <mt-tab-container-item id="3" class="detaildiv tabheight">
           <p>交易历史</p>
           <br>
-          <mt-cell class="cell" v-for="item in transList" title="飞天茅台" label="XXX02 → 白酒银行     2017/07/01 07:09">
-            <span>转让     ¥2100.00</span>
+          <mt-cell class="cell" v-for="item in transList" :title="sakeinfo.title" label="XXX02 → 白酒银行     2017/07/01 07:09">
+            <span>转让     ¥{{ transList.amount }}.00</span>
             <img slot="icon" src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" width="30" height="30">
           </mt-cell>
           <!-- <div class="lineslim"></div> -->
@@ -86,119 +87,28 @@
 export default {
   name: "Detail",
   data: () => ({
-    tabindex: "5",
-    transList: [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    commitList: [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    newsList: [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ]
+    tabindex: "1",
+    transList: [],
+    commitList: [],
+    newsList: [],
+    sakeinfo:{}
   }),
   created() {
-    this.$http.get('http://47.75.74.227:8080/api/user', 
+    this.$http.get('http://47.75.74.227:8080/api/spirits/1', 
       {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
     .then(response => {
-      console.log(response.body)
-    }, response => {
-      // error callback
+      if(response.body.statusCode == 200) {
+        this.sakeinfo = response.body.result;
+      }
     });
 
+    this.$http.get('http://47.75.74.227:8080/api/spirits/1/trades', 
+      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    .then(response => {
+      if(response.body.statusCode == 200) {
+        // this.transList = response.body.result;
+      }
+    });
       // const formData = new FormData();
       // formData.append('address', this.address);
       // this.$http.post(this.$store.getters.getServerURL+'addrankshuihunas.php', formData)
