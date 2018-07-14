@@ -9,9 +9,10 @@
 </template>
 
 <script>
+import config from "../../api/service";
 import { splitEvery } from "ramda";
 import ItemCard from "./ItemCard";
-
+import {mapGetters} from "vuex"
 export default {
   components: {
     ItemCard
@@ -20,7 +21,22 @@ export default {
   computed: {
     rows() {
       return splitEvery(4, this.goods);
+    },
+      ...mapGetters({
+          token: "getToken"
+      })
+  },
+  async created() {
+      let thiz = this;
+    const { body } = await this.$http.get(
+      `${config.baseUrl.production}/spirits`
+    );
+    var data = body.result;
+    for(var item in data){
+        data[item].coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data[item].coverFileDownloadUrl;
     }
+    console.error(data)
+    this.goods = body.result;
   },
   data: () => ({
     goods: [
@@ -81,5 +97,10 @@ export default {
 #item-list {
   max-width: 90%;
   margin: 0 auto;
+}
+.column {
+  width: 50%;
+  padding: 0.25rem;
+  float: left;
 }
 </style>
