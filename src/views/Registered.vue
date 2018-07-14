@@ -2,7 +2,7 @@
     <div class="content">
        <mt-header title="新用户注册"  class="header" ></mt-header>
         <div class="bodyForm">
-            <mt-field label="+86" placeholder="请输入手机号码" v-model="user.phone"></mt-field>
+            <mt-field label="+86>" placeholder="请输入手机号码" v-model="user.phone"></mt-field>
             <mt-field placeholder="请输入验证码" v-model="user.valificationCode">
                 <mt-badge @click.native="getValificationCode" size="small" color="#F5F5F5"  :disabled="editFlag" style="color: #3F51B5">{{valificationText}}</mt-badge>
             </mt-field>

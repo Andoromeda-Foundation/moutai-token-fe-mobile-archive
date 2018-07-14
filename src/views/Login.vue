@@ -7,7 +7,7 @@
             <img src="https://ws2.sinaimg.cn/large/006tKfTcgy1ft7ak20qkoj30go0f2aag.jpg" alt="Identicon" style="border-radius: 50%;  width: 100px;">
         </div>
         <div class="bodyForm">
-            <mt-field label="+86" placeholder="请输入手机号码" v-model="user.phone"></mt-field>
+            <mt-field label="+86>" placeholder="请输入手机号码" v-model="user.phone"></mt-field>
             <mt-field placeholder="请输入验证码" v-model="user.valificationCode">
                 <mt-badge @click.native="getValificationCode" size="small" color="#F5F5F5"  :disabled="editFlag" style="color: #3F51B5">{{valificationText}}</mt-badge>
             </mt-field>
