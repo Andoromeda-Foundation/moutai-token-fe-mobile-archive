@@ -23,10 +23,10 @@
       <mt-cell title="资产列表" to="UserAssets" is-link>
           <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
       </mt-cell>
-      <mt-cell title="交易记录" to="UserAssets" is-link value="">
+      <mt-cell title="交易记录" to="UserTransferList" is-link>
           <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
       </mt-cell>
-      <mt-cell title="钱包" to="UserAssets" is-link value="">
+      <mt-cell title="钱包" to="UserWallet" is-link>
           <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
       </mt-cell>
       <div>
