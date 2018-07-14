@@ -84,6 +84,8 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+    import config from "../api/service.js"
 export default {
   name: "Detail",
   data: () => ({
@@ -93,17 +95,25 @@ export default {
     newsList: [],
     sakeinfo:{}
   }),
+    computed:{
+        ...mapGetters({
+            token: "getToken"
+        })
+    },
   created() {
-    this.$http.get('http://47.75.74.227:8080/api/spirits/1', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    let thiz = this;
+//    this.$http.get('http://47.75.74.227:8080/api/spirits/1',
+      this.$http.get(`${config.baseUrl.production}/spirits/1`,
+          {headers: {'token': thiz.token}})
     .then(response => {
       if(response.body.statusCode == 200) {
         this.sakeinfo = response.body.result;
       }
     });
 
-    this.$http.get('http://47.75.74.227:8080/api/spirits/1/trades', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+//    this.$http.get('http://47.75.74.227:8080/api/spirits/1/trades',
+      this.$http.get(`${config.baseUrl.production}/spirits/1/trades`,
+          {headers: {'token': thiz.token}})
     .then(response => {
       if(response.body.statusCode == 200) {
         // this.transList = response.body.result;

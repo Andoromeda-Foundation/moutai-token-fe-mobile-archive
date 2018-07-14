@@ -41,6 +41,8 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+    import config from "../api/service.js"
 export default {
   name: "UserTransferList",
   data() {
@@ -65,6 +67,11 @@ export default {
       ]
     };
   },
+    computed:{
+        ...mapGetters({
+            token: "getToken"
+        })
+    },
   methods: {
     toggleTabs: function(e) {
       this.nowIndex = e.target.innerText;
@@ -90,8 +97,11 @@ export default {
     }
   },
   created() {
-    this.$http.get('http://47.75.74.227:8080/api//user/trades', 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+      let thiz = this;
+      /* this.$http.get('http://47.75.74.227:8080/api//user/trades',
+       {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})*/
+      this.$http.get(`${config.baseUrl.production}/user/trades` ,
+          {headers: {'token': thiz.token}})
     .then(response => {
       console.log(response.body)
       this.list = response.body.result || [];
