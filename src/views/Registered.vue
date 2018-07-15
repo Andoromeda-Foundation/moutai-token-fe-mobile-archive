@@ -48,11 +48,10 @@
 import config from "../api/service";
 import MtHeader from "../../node_modules/mint-ui/packages/header/src/header";
 import MtField from "../../node_modules/mint-ui/packages/field/src/field";
-import {MessageBox, Toast} from "mint-ui"
+import {Toast} from "mint-ui"
 export default {
   components: {
       Toast,
-      MessageBox,
     MtField,
     MtHeader
   },
@@ -98,19 +97,19 @@ export default {
   methods: {
     submitForm() {
       if (!this.user.phone) {
-        MessageBox("提示","请输入电话号码");
+        Toast("请输入电话号码");
         return;
       }
       if (!this.user.valificationCode) {
-        MessageBox("提示","请输入验证码");
+        Toast("请输入验证码");
         return;
       }
       if (!this.user.name) {
-        MessageBox("提示","请输入昵称");
+        Toast("请输入昵称");
         return;
       }
       if (!this.user.invitationCode) {
-        MessageBox("提示","请输入邀请码");
+        Toast("请输入邀请码");
         return;
       }
       this.$ajax({
@@ -131,17 +130,17 @@ export default {
               this.token = data.result.token;
               this.$store.commit("updateToken", data.result.token);
               this.$store.commit("updatePhone",this.user.phone);
-              MessageBox("提示","注册成功");
+              Toast("注册成功");
               this.$router.push("/");
             } else {
-              MessageBox("提示",data.message);
+              Toast(data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            MessageBox("提示",data.message);
+            Toast(data.message);
           }
         });
     },
@@ -155,7 +154,7 @@ export default {
     }
       var phone = this.user.phone;
       if (!phone) {
-        MessageBox("提示","请输入手机号码");
+        Toast("请输入手机号码");
         return;
       }
       this.$ajax({
@@ -173,14 +172,14 @@ export default {
                 Toast("验证码已经生成测试环境默认1234，短信通知后台尚未接入");
               this.countTime();
             } else {
-              MessageBox("提示",data.message);
+              Toast(data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            MessageBox("提示",data.message);
+            Toast(data.message);
           }
         });
     },

@@ -49,12 +49,11 @@ import MtHeader from "../../node_modules/mint-ui/packages/header/src/header";
 import MtButton from "../../node_modules/mint-ui/packages/button/src/button";
 import MtField from "../../node_modules/mint-ui/packages/field/src/field";
 import MtBadge from "../../node_modules/mint-ui/packages/badge/src/badge";
-import {MessageBox,Toast} from "mint-ui";
+import {Toast} from "mint-ui";
 import {mapGetters} from "vuex";
 export default {
   components: {
       Toast,
-      MessageBox,
       MtBadge,
     MtField,
     MtButton,
@@ -99,11 +98,11 @@ export default {
   methods: {
     submitForm() {
       if (!this.user.phone) {
-        MessageBox("提示","请输入电话号码");
+        Toast("请输入电话号码");
         return;
       }
       if (!this.user.valificationCode) {
-        MessageBox("提示","请输入验证码");
+        Toast("请输入验证码");
         return;
       }
       this.$ajax({
@@ -123,14 +122,14 @@ export default {
               this.$store.commit("updateToken", data.result.token);
               this.$router.push("/home");
             } else {
-              MessageBox("提示",data.message);
+              Toast(data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            MessageBox("提示",data.message);
+            Toast(data.message);
           }
         });
     },
@@ -141,7 +140,7 @@ export default {
         }
       var phone = this.user.phone;
       if (!phone) {
-        MessageBox("提示","请输入手机号码");
+        Toast("请输入手机号码");
         return;
       }
       this.$ajax({
@@ -159,14 +158,14 @@ export default {
                 Toast("验证码已经生成测试环境默认1234，短信通知后台尚未接入");
               this.countTime();
             } else {
-              MessageBox("提示",data.message);
+              Toast(data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            MessageBox("提示",data.message);
+            Toast(data.message);
           }
         });
     },
