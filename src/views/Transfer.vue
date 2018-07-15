@@ -33,15 +33,23 @@
               <mt-cell title="价格：" to="UserAssets" is-link>10000
               </mt-cell>
           <div class="line"></div>
-          <div style="padding-top:10px;padding-right:10px;">
+         <!-- <div style="padding-top:10px;padding-right:10px;">
             <a class="button is-fullwidth is-rounded content"
              style="background-color:#3F51B5">确认转账</a>
-          </div>
+          </div>-->
+      <mt-button class="btn" @click.native="TransferTo">确认转让</mt-button>
   </div>
 </template>
   <script>
+      import {Toast,MessageBox} from "mint-ui";
+      import {mapGetters} from  "vuex";
+      import config from "../api/service"
 export default {
   name: "Transfer",
+    components:{
+        Toast,
+        MessageBox
+    },
   data: () => ({
     tabindex: "5",
     id: 0,
@@ -54,12 +62,13 @@ export default {
     degree:0,
     specification:0,
   }),
+
   created(){
     const arr = window.location.href.split('/');
     this.id = arr[arr.length-1]
-    console.log(this.id)
-    this.$http.get('http://47.75.74.227:8080/api/spirits/'+this.id, 
-      {headers: {'token': 'eb8f7736127b3af7ab12558a74cc5c50'}})
+    var thiz = this;
+    this.$http.get(`${config.baseUrl.production}/spirits/`+this.id,
+      {headers: {'token': thiz.token}})
     .then(response => {
         const results = response.body.result;
         this.title = results.title;
@@ -74,7 +83,23 @@ export default {
     }, response => {
       // error callback
     });
-  }
+  },
+    computed:{
+        ...mapGetters({
+            token: "getToken"
+        })
+    },
+    methods:{
+        TransferTo(){
+            MessageBox.prompt("转让价(¥)").then(({value,action}) =>{
+                if(!value||isNaN(value)){
+                    Toast("请输入数字")
+                    return
+                }
+
+            });
+        }
+    }
 };
 </script>
 
@@ -146,4 +171,12 @@ tab4
 /**
 tab5
 **/
+
+.btn {
+    width: 100%;
+    color: white;
+    background-color: #3F51B5;
+    margin-top: 20px;
+    border-radius: 2.5rem;
+}
 </style>
