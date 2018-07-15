@@ -1,4 +1,21 @@
 <template>
+  <div class="Home-view">
+    <ItemList />
+  </div>
+</template>
+
+<script>
+import ItemList from "../components/Item/ItemList";
+
+export default {
+  name: "Home",
+  components: {
+    ItemList
+  }
+};
+</script>
+
+<!-- <template>
   <div class="User-Assets-view">
     <section>
       <div>
@@ -18,7 +35,6 @@
             <UserCardList />
 		</div>
         <div class="buy-sell-view" v-if="nowIndex==tabsParam[1]">
-            <!-- <UserCardList /> -->
 		</div>
 	</div>
     </section>
@@ -59,3 +75,4 @@ export default {
   }
 };
 </script>
+ -->
