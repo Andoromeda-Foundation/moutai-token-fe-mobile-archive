@@ -88,7 +88,7 @@ export default {
     };
   },
     created(){
-      this.user.phone=this.newPhone;
+      this.user.phone=!this.newPhone?"13823703379":this.newPhone;
     },
     computed:{
         ...mapGetters({

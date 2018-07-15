@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="Home-view">
     <ItemList />
   </div>
@@ -13,9 +13,9 @@ export default {
     ItemList
   }
 };
-</script>
+</script>-->
 
-<!-- <template>
+ <template>
   <div class="User-Assets-view">
     <section>
       <div>
@@ -75,4 +75,3 @@ export default {
   }
 };
 </script>
- -->

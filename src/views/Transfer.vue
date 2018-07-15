@@ -30,7 +30,7 @@
             <p><a class="detail">规格：</a><a class="content">{{specification}}</a></p>
           </div>
           <div class="line"></div>
-              <mt-cell title="价格：" to="UserAssets" is-link>10000
+              <mt-cell title="价格¥：" to="UserAssets" is-link>{{transferPrice}}
               </mt-cell>
           <div class="line"></div>
          <!-- <div style="padding-top:10px;padding-right:10px;">
@@ -61,6 +61,7 @@ export default {
     time:0,
     degree:0,
     specification:0,
+      transferPrice:''
   }),
 
   created(){
@@ -79,6 +80,7 @@ export default {
         this.time = results.time;
         this.degree = results.degree;
         this.specification = results.specification;
+        this.transferPrice = results.nextPrice;
         console.log(response.body)
     }, response => {
       // error callback
@@ -91,12 +93,38 @@ export default {
     },
     methods:{
         TransferTo(){
+            let thiz= this;
             MessageBox.prompt("转让价(¥)").then(({value,action}) =>{
                 if(!value||isNaN(value)){
                     Toast("请输入数字")
                     return
                 }
+                this.transferPrice = value;
+               //转让
+                this.$ajax({
+                    method:"patch",
+                    url: `${config.baseUrl.production}/spirits/`+thiz.id,
+                    headers:{token: thiz.token},
+                    data:{
+                        status: "sale",
+                        nextPrice: value
+                    }
+                }).then(res =>{
+                    console.error(res)
+                    if(res.data.statusCode == 200){
+                        MessageBox("提示","转让成功！")
+                    }else {
+                        if(res.data.message =="Unauthorized"){
+                            MessageBox("提示","请重新登录！")
+                            this.$router.push("/");
+                            return;
+                        }
+                        MessageBox("提示","转让失败！")
+                    }
 
+                }).catch(err =>{
+
+                })
             });
         }
     }
