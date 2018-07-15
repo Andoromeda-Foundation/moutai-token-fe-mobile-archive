@@ -233,7 +233,7 @@ export default {
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    color: #ffff;
+    color: white;
 }
 .logo{
     display: flex;
@@ -242,5 +242,6 @@ export default {
     margin: 0 1.2rem 0 1.7rem;
     font-family: ShanghaiFace-Rock-BoldGB-Regular;
     font-size: 22.5px;
+    color: white !important;
 }
 </style>

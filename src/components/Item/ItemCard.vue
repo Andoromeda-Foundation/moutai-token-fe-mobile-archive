@@ -51,7 +51,7 @@
   .img-font{
     position: absolute;
     background: #3F51B5;
-    color: #ffff;
+    color: white !important;
     top: 0.7rem;
     right: 0.3rem;
     font-weight: 600;
