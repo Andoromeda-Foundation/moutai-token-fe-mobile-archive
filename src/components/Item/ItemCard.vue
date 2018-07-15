@@ -10,10 +10,10 @@
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="title is-4" style="font-size: 1rem;margin-bottom: 0.5rem">{{props.title}}</p>
+        <p class="title is-4" style="font-size: 0.9rem;margin-bottom: 0.5rem">{{props.title}}</p>
         <div>
-        <span class="subtitle">拥有者： {{!props.user?"":props.user.nickname}}</span>
-        <span class="subtitle pickup" style="margin-top: 0.3rem">3 天后提货</span>
+        <span class="subtitle">拥有者:{{!props.user?"":props.user.nickname}}</span>
+        <span class="subtitle pickup" style="margin-top: 0.4rem">3 天后提货</span>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
   font-size: 1.5rem;
 }
 .subtitle {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 .card-content {
     padding: 0.5rem;
@@ -55,7 +55,7 @@
     top: 0.7rem;
     right: 0.3rem;
     font-weight: 600;
-    width: 4.5rem;
+    width: 4.2rem;
     align-contenet: center;
     marigin: 1rem;
     display: flex;
