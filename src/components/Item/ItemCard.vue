@@ -10,7 +10,7 @@
     <div class="media">
       <div class="media-content">
         <p class="title is-4" style="font-size: 0.5rem">{{props.title}}</p>
-        <span class="subtitle">拥有者： {{props.user.nickname}}</span>
+        <span class="subtitle">拥有者： {{!props.user?"":props.user.nickname}}</span>
         <span class="subtitle pickup" >3 天后提货</span>
       </div>
     </div>

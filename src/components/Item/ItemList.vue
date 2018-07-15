@@ -35,7 +35,6 @@ export default {
     for(var item in data){
         data[item].coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data[item].coverFileDownloadUrl;
     }
-    console.error(data)
     this.goods = body.result;
   },
   methods: {
