@@ -9,7 +9,11 @@
        最近交易
         </mt-button>
       <mt-button slot="right">
+<<<<<<< HEAD
         <router-link :to="{name: 'itemList'}">查看更多</router-link>
+=======
+        <router-link :to="{name: 'MoreList'}">查看更多</router-link>
+>>>>>>> 59158f7dfe29cdb69aab3090ef5f2571cadfb827
         </mt-button>
     </mt-header>
     <ItemList />
