@@ -26,8 +26,8 @@
           <div class="detaildiv">
             <p><a class="detail">品牌：</a><a class="content">{{brand}}</a></p>
             <p><a class="detail">年份：</a><a class="content">{{time}}</a></p>
-            <p><a class="detail">度数：</a><a class="content">{{degree}}%vol</a></p>
-            <p><a class="detail">规格：</a><a class="content">{{specification}}ml</a></p>
+            <p><a class="detail">度数：</a><a class="content">{{degree}}</a></p>
+            <p><a class="detail">规格：</a><a class="content">{{specification}}</a></p>
           </div>
           <div class="line"></div>
               <mt-cell title="价格：" to="UserAssets" is-link>10000

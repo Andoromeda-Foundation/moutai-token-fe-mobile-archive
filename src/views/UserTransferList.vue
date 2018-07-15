@@ -18,12 +18,12 @@
             <mt-cell :title="item.name" style="border-style:outset;border-width:1px;">
               <span slot="icon">
                 {{getarrow(item.type)}}
-                <img :src="item.img" width="36" height="36">
+                <img :src="item.coverFileDownloadUrl" width="36" height="36">
               </span>
               <span style="margin-left:30px;" class="smallgreen">{{item.type}}</span>
-              <span style="margin-left:30px;" class="price">{{item.amount}}</span>
+              <span style="margin-left:50px;" class="price">¥{{item.price}}</span>
             </mt-cell>
-            <div class="columns is-mobile">
+            <!-- <div class="columns is-mobile">
                 <div class="column is-one-third">
                     <span class="content" style="padding-left:20px;">XXX02</span>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="column is-two-fifths">
                     <span class="detail">12天12时00分00秒</span>
                 </div>
-            </div>
+            </div> -->
 		    </div>
 	    </div>
     </section>
@@ -49,7 +49,7 @@ export default {
     return {
       tabsParam: ["全部", "买入", "卖出"],
       nowIndex: "全部",
-      list: [
+      alllist: [
         // {
         //   img:
         //     "https://ws2.sinaimg.cn/large/006tKfTcgy1ft7ak20qkoj30go0f2aag.jpg",
@@ -64,7 +64,8 @@ export default {
         //   type: "卖出",
         //   money: 20000
         // }
-      ]
+      ],
+      list:[]
     };
   },
     computed:{
@@ -77,7 +78,21 @@ export default {
       this.nowIndex = e.target.innerText;
       if (!this.tabsParam.includes(this.nowIndex)) this.nowIndex = "全部";
       if (this.nowIndex == "买入") {
-        //let it sort..
+        this.list = [];
+        for(var item in this.alllist){
+          if(this.alllist[item].type == "买入"){
+            this.list.push(this.alllist[item]);
+          }
+        }
+      }else if (this.nowIndex == "卖出") {
+        this.list = [];
+        for(var item in this.alllist){
+          if(this.alllist[item].type == "卖出"){
+            this.list.push(this.alllist[item]);
+          }
+        }
+      }else{
+        this.list = this.alllist;
       }
       this.$forceUpdate();
     },
@@ -91,8 +106,10 @@ export default {
     getarrow: function(type) {
       if (type == "买入") {
         return "⬆";
-      } else {
+      } else if (type == "卖出"){
         return "⬇";
+      } else {
+        return "*";
       }
     }
   },
@@ -104,7 +121,21 @@ export default {
           {headers: {'token': thiz.token}})
     .then(response => {
       console.log(response.body)
-      this.list = response.body.result || [];
+      var data = response.body.result || [];
+      for(var item in data){
+        data[item].coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data[item].spirit.coverFileDownloadUrl;
+        data[item].name = data[item].spirit.brand;
+        data[item].price = data[item].spirit.currentPrice;
+        if(data[item].isCurrentUserBuy){
+          data[item].type = "买入"
+        }else if(data[item].isCurrentUserSell){
+          data[item].type = "卖出"
+        }else{
+          data[item].type = "?"
+        }
+      }
+      this.alllist = data;
+      this.list = data;
     }, response => {
       // error callback
     });

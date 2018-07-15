@@ -1,5 +1,5 @@
 <template functional>
-<div>
+<div style="border-style:outset;border-width:1px;">
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">

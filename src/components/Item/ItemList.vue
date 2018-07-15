@@ -31,6 +31,7 @@ export default {
     const { body } = await this.$http.get(
       `${config.baseUrl.production}/spirits`
     );
+    console.log(body)
     var data = body.result;
     for(var item in data){
         data[item].coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data[item].coverFileDownloadUrl;
