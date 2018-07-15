@@ -1,7 +1,12 @@
 <template>
-  <div class="has-text-centered">
-      <br>
-      <img src="https://bulma.io/images/placeholders/96x96.png"/>
+  <div>
+      <!--<img src="https://bulma.io/images/placeholders/96x96.png"/>-->
+      <div class="banerHead">
+         <div class="banerImage">
+             <span class="logo">¥</span>
+         </div>
+      </div>
+      <div  class="has-text-centered">
       <div style="font-size:15px;padding:10px">提现金额（元）</div>
       <div style="font-size:40px;font-weight:bold">¥{{balance}}</div>
       <div style="padding:10px">
@@ -9,6 +14,7 @@
          style="background-color:#3F51B5;color:#ffffff"
          href="/#/Withdraw">提现</a>
       </div>
+  </div>
   </div>
 </template>
 <script>
@@ -41,3 +47,30 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+    .banerHead{
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        margin-top: 2rem;
+    }
+    .banerImage{
+        width: 100px;
+        height: 100px;
+        background: #3F51B5;
+        background: #3F51B5;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        color: #ffff;
+    }
+    .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 1.2rem 0 1rem;
+        font-family: ShanghaiFace-Rock-BoldGB-Regular;
+        font-size: 4rem;
+    }
+</style>
