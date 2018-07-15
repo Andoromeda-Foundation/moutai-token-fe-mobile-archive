@@ -1,6 +1,9 @@
 <template>
   <div>
       <!--<img src="https://bulma.io/images/placeholders/96x96.png"/>-->
+      <div class="headerTitle">
+          <h1>我的钱包</h1>
+      </div>
       <div class="banerHead">
          <div class="banerImage">
              <span class="logo">¥</span>
@@ -49,6 +52,14 @@ export default {
 </script>
 
 <style scoped>
+    .headerTitle{
+     display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 1.5rem;
+        color: #333333;
+        font-weight: 200;
+    }
     .banerHead{
         display: flex;
         justify-content: center;
