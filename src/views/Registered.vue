@@ -4,7 +4,7 @@
         <div class="bodyForm">
             <mt-field label="+86>" placeholder="请输入手机号码" v-model="user.phone"></mt-field>
             <mt-field placeholder="请输入验证码" v-model="user.valificationCode">
-                <mt-badge @click.native="getValificationCode" size="small" color="#F5F5F5"  :disabled="editFlag" style="color: #3F51B5">{{valificationText}}</mt-badge>
+                <mt-badge @click.native="getValificationCode" size="small" color="#F5F5F5"  style="color: #3F51B5">{{valificationText}}</mt-badge>
             </mt-field>
             <mt-field placeholder="请输入昵称" v-model="user.name"></mt-field>
             <mt-field placeholder="请输入邀请码" v-model="user.invitationCode"></mt-field>
@@ -49,9 +49,10 @@
 import config from "../api/service";
 import MtHeader from "../../node_modules/mint-ui/packages/header/src/header";
 import MtField from "../../node_modules/mint-ui/packages/field/src/field";
-import {MessageBox} from "mint-ui"
+import {MessageBox, Toast} from "mint-ui"
 export default {
   components: {
+      Toast,
       MessageBox,
     MtField,
     MtHeader
@@ -149,6 +150,10 @@ export default {
       this.$refs[formName].resetFields();
     },
     getValificationCode() {
+    if(this.editFlag){
+        Toast("请稍后再试");
+        return;
+    }
       var phone = this.user.phone;
       if (!phone) {
         MessageBox("提示","请输入手机号码");
@@ -166,6 +171,7 @@ export default {
           if (res) {
             var data = res.data;
             if (data.statusCode == "200") {
+                Toast("验证码已经生成测试环境默认1234，短信通知后台尚未接入");
               this.countTime();
             } else {
               MessageBox("提示",data.message);

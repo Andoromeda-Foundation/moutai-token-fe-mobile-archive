@@ -47,10 +47,11 @@ import MtHeader from "../../node_modules/mint-ui/packages/header/src/header";
 import MtButton from "../../node_modules/mint-ui/packages/button/src/button";
 import MtField from "../../node_modules/mint-ui/packages/field/src/field";
 import MtBadge from "../../node_modules/mint-ui/packages/badge/src/badge";
-import {MessageBox} from "mint-ui";
+import {MessageBox,Toast} from "mint-ui";
 import {mapGetters} from "vuex";
 export default {
   components: {
+      Toast,
       MessageBox,
       MtBadge,
     MtField,
@@ -132,6 +133,10 @@ export default {
         });
     },
     getValificationCode() {
+        if(this.editFlag){
+            Toast("请稍后再试");
+            return;
+        }
       var phone = this.user.phone;
       if (!phone) {
         MessageBox("提示","请输入手机号码");
@@ -149,6 +154,7 @@ export default {
           if (res) {
             var data = res.data;
             if (data.statusCode == "200") {
+                Toast("验证码已经生成测试环境默认1234，短信通知后台尚未接入");
               this.countTime();
             } else {
               MessageBox("提示",data.message);
