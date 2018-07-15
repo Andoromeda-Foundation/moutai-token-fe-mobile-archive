@@ -21,7 +21,10 @@ export default {
   computed: {
     rows() {
       return splitEvery(4, this.goods);
-    }
+    },
+    ...mapGetters({
+        token: "getToken"
+    })
   },
  methods:{
      Transfer(good){
@@ -30,45 +33,27 @@ export default {
  },
   data: () => ({
     goods: [
-      {
-      "id": 0,
-      "title": "string",
-      "status": "string",
-      "coverFile": "string",
-      coverFileDownloadUrl: "https://ws3.sinaimg.cn/large/006tKfTcgy1ft7ajz8j0tj306404lq2s.jpg",
-          name: "茅台",
-          owner: "Dawn",
-          price: "10000",
-          tokenId: "1",
-      "brand": "string",
-      "region": "string",
-      "time": 0,
-      "degree": 0,
-      "specification": 0,
-      "currentPrice": 0,
-      "nextPrice": 0,
-      "freezeTo": "string",
-      "description": "string",
-      "history": [
-        {}
-      ],
-      "userId": "string",
-      "createdAt": "string",
-      "updatedAt": "string"
-    }
     ]
   }),
   created() {
-      let thiz = this;
+    let thiz = this;
 //    this.$http.get('http://47.75.74.227:8080/api//user/spirits',
-    // this.$http.get(`${config.baseUrl.production}/user/spirits`,
-    //       {headers: {'token': thiz.token}})
-    // .then(response => {
-    //   console.log(response.body)
-    //   this.goods = response.body.result || [];
-    // }, response => {
-    //   // error callback
-    // });
+    console.log(thiz.token);
+    this.$http.get(`${config.baseUrl.production}/user/spirits`,
+          {headers: {'token': thiz.token}})
+    .then(response => {
+      console.log(response.body)
+      var data = response.body.result || [];
+      for(var item in data){
+        data[item].coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data[item].coverFileDownloadUrl;
+        data[item].name = data[item].brand;
+        data[item].owner = data[item].user.nickname;
+        data[item].price = data[item].currentPrice;
+      }
+      this.goods = data;
+    }, response => {
+      // error callback
+    });
   },
 };
 </script>
