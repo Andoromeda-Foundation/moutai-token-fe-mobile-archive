@@ -11,12 +11,9 @@ import Transfer from "./views/Transfer.vue";
 import UserTransferList from "./views/UserTransferList.vue";
 import UserWallet from "./views/UserWallet.vue";
 import Withdraw from "./views/Withdraw.vue";
-<<<<<<< HEAD
 import itemList from "./components/Item/ItemList.vue"
-=======
 import MoreList from "./views/MoreList.vue";
 
->>>>>>> 59158f7dfe29cdb69aab3090ef5f2571cadfb827
 Vue.use(Router);
 
 export default new Router({
@@ -91,13 +88,11 @@ export default new Router({
       name: "Withdraw",
       component: Withdraw
     },
-<<<<<<< HEAD
       {
         path: "/itemList",
           name: "itemList",
           component: itemList
-      }
-=======
+      },
     {
       path: "/Withdraw",
       name: "Withdraw",
@@ -108,6 +103,5 @@ export default new Router({
       name: "MoreList",
       component: MoreList
     }
->>>>>>> 59158f7dfe29cdb69aab3090ef5f2571cadfb827
   ]
 });
