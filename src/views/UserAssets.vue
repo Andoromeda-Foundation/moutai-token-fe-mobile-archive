@@ -35,7 +35,7 @@ export default {
             <UserCardList />
 		</div>
         <div class="buy-sell-view" v-if="nowIndex==tabsParam[1]">
-
+			<UserCardList />
 		</div>
 	</div>
     </section>

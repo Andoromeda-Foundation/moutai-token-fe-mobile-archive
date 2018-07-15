@@ -75,7 +75,7 @@ export default {
     };
     return {
       user: {
-        phone: "13823703379",
+        phone: "",
         valificationCode: "1234"
       },
       rules2: {
@@ -88,7 +88,8 @@ export default {
     };
   },
     created(){
-      this.user.phone=!this.newPhone?"13823703379":this.newPhone;
+//      this.user.phone=!this.newPhone?"13823703379":this.newPhone;
+        this.user.phone=this.newPhone;
     },
     computed:{
         ...mapGetters({
