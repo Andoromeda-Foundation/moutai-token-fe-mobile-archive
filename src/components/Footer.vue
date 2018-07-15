@@ -28,11 +28,15 @@
 
 <script>
 import { mapGetters } from "vuex";
+import {Toast} from "mint-ui"
 export default {
   name: "NavigateTabBar",
   data: () => ({
     selected: 0
   }),
+    component:{
+        Toast
+    },
   computed: {
     ...mapGetters({
       token: "getToken"
@@ -41,7 +45,7 @@ export default {
   methods: {
     menuTab(name) {
       if (!this.token) {
-        alert("请先登录");
+          Toast("请先登录");
         this.$router.push("/");
         return;
       }
