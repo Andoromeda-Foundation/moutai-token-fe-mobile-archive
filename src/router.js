@@ -11,7 +11,7 @@ import Transfer from "./views/Transfer.vue";
 import UserTransferList from "./views/UserTransferList.vue";
 import UserWallet from "./views/UserWallet.vue";
 import Withdraw from "./views/Withdraw.vue";
-
+import itemList from "./components/Item/ItemList.vue"
 Vue.use(Router);
 
 export default new Router({
@@ -85,6 +85,11 @@ export default new Router({
       path: "/Withdraw",
       name: "Withdraw",
       component: Withdraw
-    }
+    },
+      {
+        path: "/itemList",
+          name: "itemList",
+          component: itemList
+      }
   ]
 });
