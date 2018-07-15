@@ -9,11 +9,10 @@
             <mt-field placeholder="请输入昵称" v-model="user.name"></mt-field>
             <mt-field placeholder="请输入邀请码" v-model="user.invitationCode"></mt-field>
             <mt-button class="btn" @click.native="submitForm">注册</mt-button>
-            <a>
+
                 <router-link :to="{name: 'Login'}">
-                    已有账户去登录
+                    <div class="linkcss">已有账户去登录</div>
                 </router-link>
-            </a>
            <!-- <el-form style="top: 20px" :model="user" status-icon :rules="rules2" ref="user" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="+86：" prop="phone">
                     <el-input  v-model="user.phone" auto-complete="off" placeholder="请输入手机号码"></el-input>
@@ -226,11 +225,14 @@ export default {
     color: white;
     background-color: #3f51b5;
     margin-top: 20px;
+    border-radius: 2.5rem;
 }
 .linkcss {
     width: 100%;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
+    margin-top: 20px;
+    margin-left: 30%;
+}
+a{
+    color: #666666;
 }
 </style>

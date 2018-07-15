@@ -4,7 +4,8 @@
 
         </mt-header>
         <div class="headerImage">
-            <img src="https://ws2.sinaimg.cn/large/006tKfTcgy1ft7ak20qkoj30go0f2aag.jpg" alt="Identicon" style="border-radius: 50%;  width: 100px;">
+            <!--<img src="https://ws2.sinaimg.cn/large/006tKfTcgy1ft7ak20qkoj30go0f2aag.jpg" alt="Identicon" style="border-radius: 50%;  width: 100px;">-->
+            <div class="banerImage"><span class="logo">白酒银行</span></div>
         </div>
         <div class="bodyForm">
             <mt-field label="+86>" placeholder="请输入手机号码" v-model="user.phone"></mt-field>
@@ -12,11 +13,12 @@
                 <mt-badge @click.native="getValificationCode" size="small" color="#F5F5F5"  :disabled="editFlag" style="color: #3F51B5">{{valificationText}}</mt-badge>
             </mt-field>
             <mt-button class="btn" @click.native="submitForm">登录</mt-button>
-            <div  class="linkcss">
+
                 <router-link :to="{name: 'Registered'}" style="text-decoration: none">
+                    <div  class="linkcss">
                    <span>没有账号去注册</span>
+                    </div>
                 </router-link>
-            </div>
           <!--  <el-form :model="user"  status-icon :rules="rules2" ref="user" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="+86：" prop="phone">
                     <el-input  v-model="user.phone" auto-complete="off" placeholder="请输入手机号码"></el-input>
@@ -203,16 +205,42 @@ export default {
 .headerImage {
   margin-bottom: 30px;
 }
+.bodyForm {
+     margin-bottom: 30px;
+ }
 .btn {
   width: 100%;
   color: white;
-  background-color: #3f51b5;
+  background-color: #3F51B5;
   margin-top: 20px;
+    border-radius: 2.5rem;
 }
 .linkcss {
   width: 100%;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
+    margin-top: 20px;
+    margin-left: 30%;
+}
+    a{
+        color: #666666;
+    }
+
+.banerImage{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to left,#7389DB,#3F51B5);
+    background: -webkit-gradient(linear,right top, left top,from(#7389DB),to(#3F51B5));
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #ffff;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1.2rem 0 1.7rem;
+    font-family: ShanghaiFace-Rock-BoldGB-Regular;
+    font-size: 22.5px;
 }
 </style>
