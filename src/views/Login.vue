@@ -47,9 +47,12 @@ import MtHeader from "../../node_modules/mint-ui/packages/header/src/header";
 import MtButton from "../../node_modules/mint-ui/packages/button/src/button";
 import MtField from "../../node_modules/mint-ui/packages/field/src/field";
 import MtBadge from "../../node_modules/mint-ui/packages/badge/src/badge";
+import {MessageBox} from "mint-ui";
+import {mapGetters} from "vuex";
 export default {
   components: {
-    MtBadge,
+      MessageBox,
+      MtBadge,
     MtField,
     MtButton,
     MtHeader
@@ -82,14 +85,22 @@ export default {
       wait: 60
     };
   },
+    created(){
+      this.user.phone=this.newPhone;
+    },
+    computed:{
+        ...mapGetters({
+            newPhone: "getPhone"
+        })
+    },
   methods: {
     submitForm() {
       if (!this.user.phone) {
-        alert("请输入电话号码");
+        MessageBox("提示","请输入电话号码");
         return;
       }
       if (!this.user.valificationCode) {
-        alert("请输入验证码");
+        MessageBox("提示","请输入验证码");
         return;
       }
       this.$ajax({
@@ -109,21 +120,21 @@ export default {
               this.$store.commit("updateToken", data.result.token);
               this.$router.push("/home");
             } else {
-              alert(data.message);
+              MessageBox("提示",data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            alert(data.message);
+            MessageBox("提示",data.message);
           }
         });
     },
     getValificationCode() {
       var phone = this.user.phone;
       if (!phone) {
-        alert("请输入手机号码");
+        MessageBox("提示","请输入手机号码");
         return;
       }
       this.$ajax({
@@ -140,14 +151,14 @@ export default {
             if (data.statusCode == "200") {
               this.countTime();
             } else {
-              alert(data.message);
+              MessageBox("提示",data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            alert(data.message);
+            MessageBox("提示",data.message);
           }
         });
     },

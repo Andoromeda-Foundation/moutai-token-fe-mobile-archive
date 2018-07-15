@@ -49,8 +49,10 @@
 import config from "../api/service";
 import MtHeader from "../../node_modules/mint-ui/packages/header/src/header";
 import MtField from "../../node_modules/mint-ui/packages/field/src/field";
+import {MessageBox} from "mint-ui"
 export default {
   components: {
+      MessageBox,
     MtField,
     MtHeader
   },
@@ -80,7 +82,7 @@ export default {
         phone: "",
         valificationCode: "1234",
         name: "",
-        invitationCode: "."
+        invitationCode: ""
       },
       rules2: {
         phone: [{ validator: validatePhone, trigger: "blur" }],
@@ -96,19 +98,19 @@ export default {
   methods: {
     submitForm() {
       if (!this.user.phone) {
-        alert("请输入电话号码");
+        MessageBox("提示","请输入电话号码");
         return;
       }
       if (!this.user.valificationCode) {
-        alert("请输入验证码");
+        MessageBox("提示","请输入验证码");
         return;
       }
       if (!this.user.name) {
-        alert("请输入昵称");
+        MessageBox("提示","请输入昵称");
         return;
       }
       if (!this.user.invitationCode) {
-        alert("请输入邀请码");
+        MessageBox("提示","请输入邀请码");
         return;
       }
       this.$ajax({
@@ -128,17 +130,18 @@ export default {
             if (data.statusCode == "200") {
               this.token = data.result.token;
               this.$store.commit("updateToken", data.result.token);
-              alert("注册成功");
+              this.$store.commit("updatePhone",this.user.phone);
+              MessageBox("提示","注册成功");
               this.$router.push("/");
             } else {
-              alert(data.message);
+              MessageBox("提示",data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            alert(data.message);
+            MessageBox("提示",data.message);
           }
         });
     },
@@ -148,7 +151,7 @@ export default {
     getValificationCode() {
       var phone = this.user.phone;
       if (!phone) {
-        alert("请输入手机号码");
+        MessageBox("提示","请输入手机号码");
         return;
       }
       this.$ajax({
@@ -165,14 +168,14 @@ export default {
             if (data.statusCode == "200") {
               this.countTime();
             } else {
-              alert(data.message);
+              MessageBox("提示",data.message);
             }
           }
         })
         .catch(err => {
           if (err) {
             var data = err.data;
-            alert(data.message);
+            MessageBox("提示",data.message);
           }
         });
     },
@@ -211,5 +214,17 @@ export default {
 }
 .bodyForm {
   margin-bottom: 30px;
+}
+.btn {
+    width: 100%;
+    color: white;
+    background-color: #3f51b5;
+    margin-top: 20px;
+}
+.linkcss {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
 }
 </style>
