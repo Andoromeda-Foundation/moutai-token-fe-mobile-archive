@@ -14,7 +14,7 @@
       <mt-tab-container-item id="1">
           <img :src="sakeinfo.coverFileDownloadUrl" width="100%" />
           <div class="detaildiv">
-            <p class="title is-6 price">¥ {{ sakeinfo.nextPrice }}.00</p>
+            <p class="title is-6 price">¥ {{ sakeinfo.nextPrice }}</p>
             <p class="title is-6">{{ sakeinfo.title }}</p>
             <p class="detail">拥有者：{{ sakeinfoowner.nickname }}</p>
             <p class="detail">解锁时间：{{ sakeinfo.freezeTo }}</p>
@@ -23,8 +23,8 @@
           <div class="detaildiv">
             <p><a class="detail">品牌：</a><a class="content">{{ sakeinfo.brand }}</a></p>
             <p><a class="detail">年份：</a><a class="content">{{ sakeinfo.time }}</a></p>
-            <p><a class="detail">度数：</a><a class="content">{{ sakeinfo.degree }}%vol</a></p>
-            <p><a class="detail">规格：</a><a class="content">{{ sakeinfo.specification }}ml</a></p>
+            <p><a class="detail">度数：</a><a class="content">{{ sakeinfo.degree }}</a></p>
+            <p><a class="detail">规格：</a><a class="content">{{ sakeinfo.specification }}</a></p>
           </div>
           <div class="field">
             <mt-button class="button" type="default">主页</mt-button>
@@ -42,12 +42,12 @@
           <p>交易历史</p>
           <br>
           <div class="cell" v-for="item in transList">
-            <img slot="icon" src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" width="30" height="30">
+            <img slot="icon" :src="sakeinfo.coverFileDownloadUrl" width="30" height="30">
             <span class="content">{{ sakeinfo.title }}</span>
             <br>
             <span class="content">{{ item.fromUser.nickname }} → {{ item.toUser.nickname }} {{ item.updatedAt }}</span>
             <br>
-            <span class="content">转让 ¥{{ item.price }}.00</span>
+            <span class="content">转让 ¥{{ item.price }}</span>
           </div>
           <div class="lineslim"></div>
       </mt-tab-container-item>
