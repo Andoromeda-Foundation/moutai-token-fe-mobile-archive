@@ -66,7 +66,7 @@
           </div>
       </mt-tab-container-item>
     </mt-tab-container>
-
+    <div id="main" style="width: 100%;height: 400px;"></div>
   </div>
 </template>
 
@@ -75,6 +75,7 @@ import config from "../api/service";
 import { mapGetters } from "vuex";
 import { Toast, MessageBox } from "mint-ui";
 import Comment from "../components/Detail/Comment";
+import echarts from "echarts";
 export default {
   name: "Detail",
   data: () => ({
@@ -83,7 +84,12 @@ export default {
     commentsList: [],
     newsList: [],
     sakeinfo: {},
-    sakeinfoowner: {}
+    sakeinfoowner: {},
+    return :{
+      charts: "",
+      opinion: ["白酒", "某某", "某偶爱", "balaba", "某某"],
+      opinionData: [420, 332, 901, 934, 1290, 1330, 1320]
+    }
   }),
   components: {
     MessageBox,
@@ -165,8 +171,42 @@ export default {
             Toast(response.body.message);
           }
         });
+    },
+
+drawPie(id) {
+      this.charts = echarts.init(document.getElementById(id));
+      this.charts.setOption({
+        title: {
+          text: "任意标题"
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: this.opinion
+        },
+        yAxis: {
+          type: "value"
+        },
+        itemStyle: {
+          color: "#6bb6f9"
+        },
+        series: [
+          {
+            data: this.opinionData,
+            type: "line",
+            areaStyle: {}
+          }
+        ]
+      });
     }
+  },
+  //调用
+  mounted() {
+    this.$nextTick(function() {
+      this.drawPie("main");
+    });
   }
+
 };
 </script>
 
