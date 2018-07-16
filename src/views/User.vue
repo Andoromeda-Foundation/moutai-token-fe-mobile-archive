@@ -3,7 +3,7 @@
     <section>
       <div class="userstatu content">
           <div class="content">
-            <img class="image is-48x48" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            <img class="image is-48x48" src="../assets/images/mine.png" alt="Placeholder image">
             <span class="title is-6 name">{{nickname}}</span>
           </div>
           <div class="maindiv">
@@ -19,17 +19,17 @@
             </div>
           </div>
       </div>
-      <mt-cell title="资产列表" to="UserAssets" is-link>
-          <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
+      <mt-cell title=" 资产列表" to="UserAssets" is-link>
+          <img slot="icon" src="../assets/images/UserAssetsList.png" width="24" height="24">
       </mt-cell>
-      <mt-cell title="交易记录" to="UserTransferList" is-link>
-          <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
+      <mt-cell title=" 交易记录" to="UserTransferList" is-link>
+          <img slot="icon" src="../assets/images/UserTransferList.png" width="24" height="24">
       </mt-cell>
-      <mt-cell title="钱包" to="UserWallet" is-link>
-          <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
+      <mt-cell title=" 钱包" to="UserWallet" is-link>
+          <img slot="icon" src="../assets/images/UserWallet.png" width="24" height="24">
       </mt-cell>
-        <mt-cell title="安全退出" @click.native="Logout()">
-            <img slot="icon" src="https://bulma.io/images/placeholders/96x96.png" width="24" height="24">
+        <mt-cell title=" 安全退出" @click.native="Logout()">
+            <img slot="icon" src="../assets/images/Logout.png"  width="24" height="24">
         </mt-cell>
       <div>
 	</div>
