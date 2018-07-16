@@ -6,12 +6,12 @@
       <span>提现金额（元）</span>
       <a style="color:#3F51B5;float:right;" @click="showmessage">提现说明</a>
       <div class="withdraw has-icons-right">
-        <input class="input is-large" type="text" placeholder="输入金额">
+        <input class="input is-large" type="text" id="valueinput" placeholder="输入金额">
             <!-- <span class="icon is-right">
                 <i class="delete"></i>
             </span> -->
       </div>
-      <div class="detail content">可提现金额{{balance}}元，全部提现</div>
+      <div class="detail content">可提现金额{{balance}}元，<a @click="withdrawall">全部提现</a></div>
       <div>
         <a class="button is-fullwidth is-rounded content"
          style="background-color:#3F51B5;color:#ffffff"
@@ -63,6 +63,9 @@ export default {
       },
       hidemessage: function(){
           this.messageshowed = false;
+      },
+      withdrawall: function(){
+          document.getElementById('valueinput').value=this.balance;
       }
   },
   created(){
