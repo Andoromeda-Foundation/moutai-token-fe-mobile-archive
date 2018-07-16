@@ -74,7 +74,6 @@ export default {
         border-radius: 50%;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
-        color: #ffff;
     }
     .logo{
         display: flex;
@@ -83,5 +82,6 @@ export default {
         margin: 0 1.2rem 0 1rem;
         font-family: ShanghaiFace-Rock-BoldGB-Regular;
         font-size: 4rem;
+        color: #ffff !important;
     }
 </style>

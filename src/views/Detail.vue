@@ -90,7 +90,7 @@
 <script>
 import config from "../api/service";
 import { mapGetters } from 'vuex';
-import { Toast } from 'mint-ui';
+import { Toast,MessageBox } from 'mint-ui';
 export default {
   name: "Detail",
   data: () => ({
@@ -101,6 +101,10 @@ export default {
     sakeinfo:{},
     sakeinfoowner:{}
   }),
+    components:{
+        MessageBox,
+        Toast
+    },
   computed: {
     ...mapGetters({token: 'getToken'})
   },
@@ -126,6 +130,11 @@ export default {
   },
   methods: {
     buySake(index) {
+        if(!this.token){
+            MessageBox("提示","请先登录");
+            this.$router.push("/Login");
+            return;
+        }
       const jsonData = {"price" : this.sakeinfo.nextPrice};
       this.$http.post(`${config.baseUrl.production}/spirits/${this.$route.params.id}/buy`, 
         jsonData, 

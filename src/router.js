@@ -19,7 +19,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: "/Home",
+      path: "/",
       name: "Home",
       component: Home
     },
@@ -44,7 +44,7 @@ export default new Router({
       component: NotFound
     },
     {
-      path: "/",
+      path: "/Login",
       name: "Login",
       component: Login
     },

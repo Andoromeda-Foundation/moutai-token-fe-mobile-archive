@@ -2,7 +2,7 @@
   <div class="footer">
     <mt-tabbar v-model="selected"
     :fixed="true">
-      <mt-tab-item id="主页" @click.native="menuTab('/Home')">
+      <mt-tab-item id="主页" @click.native="menuTab('/')">
         <img slot="icon" src="../assets/images/home.png">
         主页
       </mt-tab-item>
@@ -44,12 +44,15 @@ export default {
   },
   methods: {
     menuTab(name) {
-      if (!this.token) {
-          Toast("请先登录");
-        this.$router.push("/");
-        return;
-      }
-      this.$router.push(name);
+        if(name.indexOf("/User")>-1){
+            if (!this.token) {
+                Toast("请先登录");
+                this.$router.push("/Login");
+                return;
+            }
+        }else {
+            this.$router.push(name);
+        }
     }
   }
 };
