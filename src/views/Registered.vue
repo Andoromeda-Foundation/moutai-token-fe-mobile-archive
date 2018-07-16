@@ -131,7 +131,7 @@ export default {
               this.$store.commit("updateToken", data.result.token);
               this.$store.commit("updatePhone",this.user.phone);
               Toast("注册成功");
-              this.$router.push("/");
+              this.$router.push("/Login");
             } else {
               Toast(data.message);
             }

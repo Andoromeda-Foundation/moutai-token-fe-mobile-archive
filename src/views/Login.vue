@@ -121,7 +121,7 @@ export default {
               console.log(data);
               this.token = data.result.token;
               this.$store.commit("updateToken", data.result.token);
-              this.$router.push("/home");
+              this.$router.push("/");
             } else {
               Toast(data.message);
             }

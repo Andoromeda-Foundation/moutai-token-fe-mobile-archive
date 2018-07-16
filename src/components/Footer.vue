@@ -44,11 +44,14 @@ export default {
   },
   methods: {
     menuTab(name) {
+        console.log(name)
         if(name.indexOf("/User")>-1){
             if (!this.token) {
                 Toast("请先登录");
                 this.$router.push("/Login");
                 return;
+            }else{
+                this.$router.push(name);
             }
         }else {
             this.$router.push(name);
