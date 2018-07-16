@@ -5,8 +5,8 @@
       <mt-tab-item id="1">商品</mt-tab-item>
 <!--       <mt-tab-item id="2">价格趋势</mt-tab-item> -->
       <mt-tab-item id="3">交易历史</mt-tab-item>
-<!--       <mt-tab-item id="4">讨论区</mt-tab-item>
-      <mt-tab-item id="5">新闻</mt-tab-item> -->
+       <mt-tab-item id="4">讨论区</mt-tab-item>
+ <!--  <mt-tab-item id="5">新闻</mt-tab-item> -->
     </mt-navbar>
 
     <!-- tab-container -->
@@ -53,24 +53,7 @@
       </mt-tab-container-item>
       
       <mt-tab-container-item id="4" class="detaildiv tabheight">
-          <mt-cell class="cell" title="讨论区">
-            <mt-button class="button" type="default" size="small">发表评论</mt-button>
-          </mt-cell>
-          <div class="" v-for="item in commitList">
-              <div>
-                <img src="https://wx4.sinaimg.cn/mw690/006gTYrfgy1ft6drwphf3j311a0l3e06.jpg" style="width: 30px; height: 30px; border-radius:50%;"/>
-              </div>
-              <div class="commit">
-                <div class="content">茅台</div>
-                <div style="width: 100%; height: 10px;" />
-                <div class="content" style="width: calc(100% - 20px);">
-                  这是Qtum量子链钱包的“概览”界面，也是启动之后的默认界面，可以看到下面这些信息。
-                </div>
-                <div style="width: 100%; height: 10px;" />
-                <div class="content">2017/07/01 01:12</div>
-              </div>
-            <div class="lineslim"></div>
-          </div>
+        <Comment :comments="commentsList" :goodId="goodId"/>
       </mt-tab-container-item>
       
       <mt-tab-container-item id="5" class="detaildiv tabheight">
@@ -89,65 +72,99 @@
 
 <script>
 import config from "../api/service";
-import { mapGetters } from 'vuex';
-import { Toast,MessageBox } from 'mint-ui';
+import { mapGetters } from "vuex";
+import { Toast, MessageBox } from "mint-ui";
+import Comment from "../components/Detail/Comment";
 export default {
   name: "Detail",
   data: () => ({
     tabindex: "1",
     transList: [],
-    commitList: [],
+    commentsList: [],
     newsList: [],
-    sakeinfo:{},
-    sakeinfoowner:{}
+    sakeinfo: {},
+    sakeinfoowner: {}
   }),
-    components:{
-        MessageBox,
-        Toast
-    },
+  components: {
+    MessageBox,
+    Toast,
+    Comment
+  },
   computed: {
-    ...mapGetters({token: 'getToken'})
+    ...mapGetters({ token: "getToken" }),
+    goodId() {return this.$route.params.id}
   },
   created() {
-    this.$http.get(`${config.baseUrl.production}/spirits/${this.$route.params.id}`, 
-      {headers: {'token': this.token}})
-    .then(response => {
-      if(response.body.statusCode == 200) {
+    // 详细 fetch 评论的逻辑写到 fetchComments()
+    this.commentsList = this.fetchComments()
+    this.$http
+      .get(`${config.baseUrl.production}/spirits/${this.$route.params.id}`, {
+        headers: { token: this.token }
+      })
+      .then(response => {
+        if (response.body.statusCode == 200) {
           var data = response.body.result;
-          data.coverFileDownloadUrl = `${config.baseUrl.imageUrl}`+ data.coverFileDownloadUrl;
-        this.sakeinfo = data;
-        this.sakeinfoowner = this.sakeinfo.user;
-      }
-    });
+          data.coverFileDownloadUrl =
+            `${config.baseUrl.imageUrl}` + data.coverFileDownloadUrl;
+          this.sakeinfo = data;
+          this.sakeinfoowner = this.sakeinfo.user;
+        }
+      });
 
-    this.$http.get(`${config.baseUrl.production}/spirits/${this.$route.params.id}/trades`, 
-      {headers: {'token': this.token}})
-    .then(response => {
-      if(response.body.statusCode == 200) {
-        this.transList = response.body.result;
-      }
-    });
+    this.$http
+      .get(
+        `${config.baseUrl.production}/spirits/${this.$route.params.id}/trades`,
+        { headers: { token: this.token } }
+      )
+      .then(response => {
+        if (response.body.statusCode == 200) {
+          this.transList = response.body.result;
+        }
+      });
   },
   methods: {
+    fetchComments() {
+      // 这里执行 API 操作,暂时用假数据顶替
+      return [{
+        username: "李田所",
+        avatar:
+          "https://ws4.sinaimg.cn/large/006tKfTcgy1ftbysij511j3098098mx5.jpg",
+        content: "是homo就干这一杯",
+        datetime: "1919-08-10"
+      },
+      {
+        username: "王道往",
+        avatar:
+          "https://ws4.sinaimg.cn/large/006tKfTcgy1ftbysij511j3098098mx5.jpg",
+        content: "114514",
+        datetime: "1919-08-10"
+      }]
+    },
     buySake(index) {
-        if(!this.token){
-            MessageBox("提示","请先登录");
-            this.$router.push("/Login");
-            return;
-        }
-      const jsonData = {"price" : this.sakeinfo.nextPrice};
-      this.$http.post(`${config.baseUrl.production}/spirits/${this.$route.params.id}/buy`, 
-        jsonData, 
-        {headers: {'token': this.token}})
-      .then((response) => {
+      if (!this.token) {
+        MessageBox("提示", "请先登录");
+        this.$router.push("/Login");
+        return;
+      }
+      const jsonData = { price: this.sakeinfo.nextPrice };
+      this.$http
+        .post(
+          `${config.baseUrl.production}/spirits/${this.$route.params.id}/buy`,
+          jsonData,
+          { headers: { token: this.token } }
+        )
+        .then(response => {
           const res = response.body;
           console.log(res);
-          if(response.body.statusCode == 200) {
+          if (response.body.statusCode == 200) {
             Toast("购买成功");
-          }else if(response.body.statusCode == 500 || response.body.statusCode == 401) {
+          } else if (
+            response.body.statusCode == 500 ||
+            response.body.statusCode == 401
+          ) {
             Toast(response.body.message);
           }
-      });
+        });
     }
   }
 };
@@ -161,9 +178,9 @@ export default {
   color: #4450b2;
 }
 .line {
-  width:100%;
-  height:10px; 
-  background:#e7e7e7;
+  width: 100%;
+  height: 10px;
+  background: #e7e7e7;
 }
 .detail {
   font-size: 14px;
@@ -187,9 +204,9 @@ export default {
 tab3
 **/
 .lineslim {
-  width:100%;
-  height:1px; 
-  background:#e7e7e7;
+  width: 100%;
+  height: 1px;
+  background: #e7e7e7;
   margin-bottom: 10px;
 }
 .columns {
