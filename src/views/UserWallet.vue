@@ -82,6 +82,6 @@ export default {
         margin: 0 1.2rem 0 1rem;
         font-family: ShanghaiFace-Rock-BoldGB-Regular;
         font-size: 4rem;
-        color: #ffff !important;
+        color: white !important;
     }
 </style>
