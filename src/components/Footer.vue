@@ -32,7 +32,7 @@ import {Toast} from "mint-ui"
 export default {
   name: "NavigateTabBar",
   data: () => ({
-    selected: 0
+    selected: 0,
   }),
     component:{
         Toast
