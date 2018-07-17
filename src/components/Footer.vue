@@ -3,23 +3,23 @@
     <mt-tabbar v-model="selected"
     :fixed="true">
       <mt-tab-item id="主页" @click.native="menuTab('/')">
-        <img slot="icon" src="../assets/images/home.png">
+        <img slot="icon" src="/assets/images/home.png">
         主页
       </mt-tab-item>
       <mt-tab-item id="资产公告"  @click.native="menuTab('')">
-        <img slot="icon" src="../assets/images/message.png">
+        <img slot="icon" src="/assets/images/message.png">
         资产公告
       </mt-tab-item>
       <mt-tab-item id="路线图" @click.native="menuTab('')">
-        <img slot="icon" src="../assets/images/line.png">
+        <img slot="icon" src="/assets/images/line.png">
         路线图
       </mt-tab-item>
       <mt-tab-item id="客服" @click.native="menuTab('')">
-        <img slot="icon" src="../assets/images/customer.png">
+        <img slot="icon" src="/assets/images/customer.png">
         客服
       </mt-tab-item>
       <mt-tab-item id="我的" @click.native="menuTab('/User')">
-        <img slot="icon" src="../assets/images/me.png">
+        <img slot="icon" src="/assets/images/me.png">
         我的
       </mt-tab-item>
     </mt-tabbar>

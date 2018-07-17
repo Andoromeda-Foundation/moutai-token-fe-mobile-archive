@@ -1,21 +1,5 @@
 <template>
   <div class="Detail-view">
-
-    <mt-tabbar
-    :fixed="true">
-      <mt-tab-item id="主页" @click.native="menuTab('/')">
-        <img slot="icon" src="../assets/images/home.png">
-        主页
-      </mt-tab-item>
-      <mt-tab-item id="客服" @click.native="menuTab('')">
-        <img slot="icon" src="../assets/images/customer.png">
-        客服
-      </mt-tab-item>
-      <mt-tab-item id="" @click.native="menuTab('')">
-        <mt-button type="primary">立即认购</mt-button>
-      </mt-tab-item>
-    </mt-tabbar>
-
     <mt-navbar v-model="tabindex">
       <mt-tab-item id="1">商品</mt-tab-item>
       <mt-tab-item id="2">价格趋势</mt-tab-item>
@@ -41,11 +25,11 @@
             <p><a class="detail">度数：</a><a class="content">{{ sakeinfo.degree }}</a></p>
             <p><a class="detail">规格：</a><a class="content">{{ sakeinfo.specification }}</a></p>
           </div>
-          <div class="field">
+       <!--   <div class="field">
             <mt-button class="button" type="default">主页</mt-button>
             <mt-button class="button" type="default">客服</mt-button>
             <mt-button class="button" type="danger" @click="buySake()">立即认购</mt-button>
-          </div>
+          </div>-->
           <div style="width: 100%; height: 50px;"></div>
       </mt-tab-container-item>
 
@@ -82,6 +66,11 @@
           </div>
       </mt-tab-container-item>
     </mt-tab-container>
+    <GeneralTabBar :menus="menus">
+      <mt-tab-item id="" @click.native="buySake()">
+        <mt-button type="primary">立即认购</mt-button>
+      </mt-tab-item>
+    </GeneralTabBar>
   </div>
 </template>
 
@@ -90,10 +79,24 @@ import config from "../api/service";
 import { mapGetters } from "vuex";
 import { Toast, MessageBox } from "mint-ui";
 import Comment from "../components/Detail/Comment";
+import GeneralTabBar from "../components/GeneralTabBar";
+
 import echarts from "echarts";
 export default {
   name: "Detail",
   data: () => ({
+    menus: [
+      {
+        name: '主页',
+        location: '/',
+        logo: "/assets/images/home.png"
+      },
+      {
+        name: '客服',
+        location: '',
+        logo: "/assets/images/customer.png"
+      }
+    ],
     tabindex: "1",
     transList: [],
     commentsList: [],
@@ -109,6 +112,7 @@ export default {
   components: {
     MessageBox,
     Toast,
+    GeneralTabBar,
     Comment
   },
   computed: {
@@ -207,6 +211,9 @@ console.log(this.token)
           }
         });
     },
+      menuTab(){
+
+      },
 
 drawPie(id) {
       this.charts = echarts.init(document.getElementById(id));

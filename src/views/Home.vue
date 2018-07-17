@@ -13,18 +13,26 @@
         </mt-button>
     </mt-header>
     <ItemList />
+    <GeneralTabBar :menus="menus">
+    </GeneralTabBar>
   </div>
 </template>
 
 <script>
 import ItemList from "../components/Item/ItemList";
 import Banner from "../components/Home/Banner";
+import GeneralTabBar from "../components/GeneralTabBar";
+import menus from "../TabBarSetting/firstClassNav";
 
 export default {
   name: "Home",
   components: {
     ItemList,
+    GeneralTabBar,
     Banner
-  }
+  },
+  data: () => ({
+    menus
+  })
 };
 </script>

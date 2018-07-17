@@ -3,7 +3,7 @@
     <section>
       <div class="userstatu content">
           <div class="content">
-            <img class="image is-48x48" src="../assets/images/mine.png" alt="Placeholder image">
+            <img class="image is-48x48" src="/assets/images/mine.png" alt="Placeholder image">
             <span class="title is-6 name">{{nickname}}</span>
           </div>
           <div class="maindiv">
@@ -20,61 +20,70 @@
           </div>
       </div>
       <mt-cell title=" 资产列表" to="UserAssets" is-link>
-          <img slot="icon" src="../assets/images/UserAssetsList.png" width="24" height="24">
+          <img slot="icon" src="/assets/images/UserAssetsList.png" width="24" height="24">
       </mt-cell>
       <mt-cell title=" 交易记录" to="UserTransferList" is-link>
-          <img slot="icon" src="../assets/images/UserTransferList.png" width="24" height="24">
+          <img slot="icon" src="/assets/images/UserTransferList.png" width="24" height="24">
       </mt-cell>
       <mt-cell title=" 钱包" to="UserWallet" is-link>
-          <img slot="icon" src="../assets/images/UserWallet.png" width="24" height="24">
+          <img slot="icon" src="/assets/images/UserWallet.png" width="24" height="24">
       </mt-cell>
         <mt-cell title=" 安全退出" @click.native="Logout()">
-            <img slot="icon" src="../assets/images/Logout.png"  width="24" height="24">
+            <img slot="icon" src="/assets/images/Logout.png"  width="24" height="24">
         </mt-cell>
       <div>
 	</div>
     </section>
-
+    <GeneralTabBar :menus="menus" />
   </div>
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
-    import config from "../api/service.js"
-    import MtCell from "../../node_modules/mint-ui/packages/cell/src/cell";
+import { mapGetters } from "vuex";
+import { Cell } from "mint-ui";
+import config from "../api/service.js";
+import GeneralTabBar from "../components/GeneralTabBar";
+import menus from "../TabBarSetting/firstClassNav";
+
 export default {
-    components: {MtCell},
-    name: "User",
+  components: { MtCell: Cell, GeneralTabBar },
+  name: "User",
   data() {
     return {
       nickname: "name",
       assetCount: 0,
-      assetPrice: 0
+      assetPrice: 0,
+      menus
     };
   },
-    computed:{
-        ...mapGetters({
-            token: "getToken"
-        })
-    },
+  computed: {
+    ...mapGetters({
+      token: "getToken"
+    })
+  },
   methods: {
-    Logout(){
-        this.$store.commit("updateToken","");
-        this.$router.push("/");
+    Logout() {
+      this.$store.commit("updateToken", "");
+      this.$router.push("/");
     }
   },
-  created(){
-      let thiz = this;
-    this.$http.get(`${config.baseUrl.production}/user`,
-      {headers: {'token': thiz.token}})//'eb8f7736127b3af7ab12558a74cc5c50'
-    .then(response => {
-        const results = response.body.result;
-        this.nickname = results.nickname;
-        this.assetCount = results.assetCount;
-        this.assetPrice = results.assetValue;
-    }, response => {
-      // error callback
-    });
+  created() {
+    let thiz = this;
+    this.$http
+      .get(`${config.baseUrl.production}/user`, {
+        headers: { token: thiz.token }
+      }) //'eb8f7736127b3af7ab12558a74cc5c50'
+      .then(
+        response => {
+          const results = response.body.result;
+          this.nickname = results.nickname;
+          this.assetCount = results.assetCount;
+          this.assetPrice = results.assetValue;
+        },
+        response => {
+          // error callback
+        }
+      );
   }
 };
 </script>

@@ -81,7 +81,7 @@ export default {
         phone: "",
         valificationCode: "1234",
         name: "",
-        invitationCode: ""
+        invitationCode: "ZP143E"
       },
       rules2: {
         phone: [{ validator: validatePhone, trigger: "blur" }],
@@ -167,6 +167,7 @@ export default {
       })
         .then(res => {
           if (res) {
+              console.error(res)
             var data = res.data;
             if (data.statusCode == "200") {
                 Toast("验证码已经生成测试环境默认1234，短信通知后台尚未接入");
