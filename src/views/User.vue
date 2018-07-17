@@ -39,12 +39,12 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
-    import config from "../api/service.js"
-    import MtCell from "../../node_modules/mint-ui/packages/cell/src/cell";
+import { mapGetters } from "vuex";
+import config from "../api/service.js";
+import { Cell } from "mint-ui";
 export default {
-    components: {MtCell},
-    name: "User",
+  components: { MtCell: Cell },
+  name: "User",
   data() {
     return {
       nickname: "name",
@@ -52,29 +52,34 @@ export default {
       assetPrice: 0
     };
   },
-    computed:{
-        ...mapGetters({
-            token: "getToken"
-        })
-    },
+  computed: {
+    ...mapGetters({
+      token: "getToken"
+    })
+  },
   methods: {
-    Logout(){
-        this.$store.commit("updateToken","");
-        this.$router.push("/");
+    Logout() {
+      this.$store.commit("updateToken", "");
+      this.$router.push("/");
     }
   },
-  created(){
-      let thiz = this;
-    this.$http.get(`${config.baseUrl.production}/user`,
-      {headers: {'token': thiz.token}})//'eb8f7736127b3af7ab12558a74cc5c50'
-    .then(response => {
-        const results = response.body.result;
-        this.nickname = results.nickname;
-        this.assetCount = results.assetCount;
-        this.assetPrice = results.assetValue;
-    }, response => {
-      // error callback
-    });
+  created() {
+    let thiz = this;
+    this.$http
+      .get(`${config.baseUrl.production}/user`, {
+        headers: { token: thiz.token }
+      }) //'eb8f7736127b3af7ab12558a74cc5c50'
+      .then(
+        response => {
+          const results = response.body.result;
+          this.nickname = results.nickname;
+          this.assetCount = results.assetCount;
+          this.assetPrice = results.assetValue;
+        },
+        response => {
+          // error callback
+        }
+      );
   }
 };
 </script>
