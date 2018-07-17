@@ -25,11 +25,11 @@
             <p><a class="detail">度数：</a><a class="content">{{ sakeinfo.degree }}</a></p>
             <p><a class="detail">规格：</a><a class="content">{{ sakeinfo.specification }}</a></p>
           </div>
-          <div class="field">
+       <!--   <div class="field">
             <mt-button class="button" type="default">主页</mt-button>
             <mt-button class="button" type="default">客服</mt-button>
             <mt-button class="button" type="danger" @click="buySake()">立即认购</mt-button>
-          </div>
+          </div>-->
           <div style="width: 100%; height: 50px;"></div>
       </mt-tab-container-item>
 
@@ -67,7 +67,7 @@
       </mt-tab-container-item>
     </mt-tab-container>
     <GeneralTabBar :menus="menus">
-      <mt-tab-item id="" @click.native="menuTab('')">
+      <mt-tab-item id="" @click.native="buySake()">
         <mt-button type="primary">立即认购</mt-button>
       </mt-tab-item>
     </GeneralTabBar>
@@ -199,6 +199,9 @@ export default {
           }
         });
     },
+      menuTab(){
+
+      },
 
 drawPie(id) {
       this.charts = echarts.init(document.getElementById(id));
