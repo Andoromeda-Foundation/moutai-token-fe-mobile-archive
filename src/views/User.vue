@@ -34,22 +34,26 @@
       <div>
 	</div>
     </section>
-
+    <GeneralTabBar :menus="menus" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import config from "../api/service.js";
 import { Cell } from "mint-ui";
+import config from "../api/service.js";
+import GeneralTabBar from "../components/GeneralTabBar";
+import menus from "../TabBarSetting/firstClassNav";
+
 export default {
-  components: { MtCell: Cell },
+  components: { MtCell: Cell, GeneralTabBar },
   name: "User",
   data() {
     return {
       nickname: "name",
       assetCount: 0,
-      assetPrice: 0
+      assetPrice: 0,
+      menus
     };
   },
   computed: {
