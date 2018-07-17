@@ -2,7 +2,8 @@
   <div class="tab-bar">
     <mt-tabbar v-model="selected"
     :fixed="true">
-      <mt-tab-item v-for="menu in menus" :key="menu.name" id="menu.name" @click.native="menuTab(menu.location)">
+      <mt-tab-item v-for="menu in menus" 
+      :key="menu.name" id="menu.name" @click.native="menuTab(menu.location)">
         <img slot="icon" :src="menu.logo">
         {{menu.name}}
       </mt-tab-item>
@@ -13,9 +14,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { Toast } from "mint-ui";
 export default {
   name: "GeneralNavigateTabBar",
   props: ["menus"],
+  components: {
+    Toast
+  },
   data: () => ({
     selected: 0
   }),

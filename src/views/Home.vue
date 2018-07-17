@@ -13,18 +13,52 @@
         </mt-button>
     </mt-header>
     <ItemList />
+    <GeneralTabBar :menus="menus">
+    </GeneralTabBar>
   </div>
 </template>
 
 <script>
 import ItemList from "../components/Item/ItemList";
 import Banner from "../components/Home/Banner";
+import GeneralTabBar from "../components/GeneralTabBar";
+
 
 export default {
   name: "Home",
   components: {
     ItemList,
+    GeneralTabBar,
     Banner
-  }
+  },
+  data: () => ({
+    menus: [
+      {
+        name: '主页',
+        location: '/',
+        logo: "/assets/images/home.png"
+      },
+      {
+        name: '资产公告',
+        location: '',
+        logo: "/assets/images/message.png"
+      },
+      {
+        name: '路线图',
+        location: '',
+        logo: "/assets/images/line.png"
+      },
+      {
+        name: '客服',
+        location: '',
+        logo: "/assets/images/customer.png"
+      },
+      {
+        name: '我的',
+        location: '/User',
+        logo: "/assets/images/me.png"
+      },
+    ]
+  })
 };
 </script>
