@@ -1,27 +1,5 @@
 <template>
   <div class="Detail-view">
-    <GeneralTabBar :menus="menus">
-      <mt-tab-item id="" @click.native="menuTab('')">
-        <mt-button type="primary">立即认购</mt-button>
-      </mt-tab-item>
-    </GeneralTabBar>
-    <!-- <mt-tabbar
-    :fixed="true">
-      <mt-tab-item id="主页" @click.native="menuTab('/')">
-        <img slot="icon" src="/assets/images/home.png">
-        主页
-      </mt-tab-item>
-      <mt-tab-item id="客服" @click.native="menuTab('')">
-        <img slot="icon" src="/assets/images/customer.png">
-        客服
-      </mt-tab-item>
-      <mt-tab-item id="" @click.native="menuTab('')">
-        <mt-button type="primary">立即认购</mt-button>
-      </mt-tab-item>
-    </mt-tabbar> -->
-
-
-
     <mt-navbar v-model="tabindex">
       <mt-tab-item id="1">商品</mt-tab-item>
       <mt-tab-item id="2">价格趋势</mt-tab-item>
@@ -88,6 +66,11 @@
           </div>
       </mt-tab-container-item>
     </mt-tab-container>
+    <GeneralTabBar :menus="menus">
+      <mt-tab-item id="" @click.native="menuTab('')">
+        <mt-button type="primary">立即认购</mt-button>
+      </mt-tab-item>
+    </GeneralTabBar>
   </div>
 </template>
 
