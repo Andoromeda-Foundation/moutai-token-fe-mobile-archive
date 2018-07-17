@@ -81,7 +81,7 @@ export default {
         phone: "",
         valificationCode: "1234",
         name: "",
-        invitationCode: ""
+        invitationCode: "ZP143E"
       },
       rules2: {
         phone: [{ validator: validatePhone, trigger: "blur" }],
