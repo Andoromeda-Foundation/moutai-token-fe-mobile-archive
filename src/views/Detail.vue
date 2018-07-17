@@ -14,15 +14,14 @@
       <mt-tab-item id="" @click.native="menuTab('')">
         <mt-button type="primary">立即认购</mt-button>
       </mt-tab-item>
-
     </mt-tabbar>
 
     <mt-navbar v-model="tabindex">
       <mt-tab-item id="1">商品</mt-tab-item>
-<!--       <mt-tab-item id="2">价格趋势</mt-tab-item> -->
+      <mt-tab-item id="2">价格趋势</mt-tab-item>
       <mt-tab-item id="3">交易历史</mt-tab-item>
-       <mt-tab-item id="4">讨论区</mt-tab-item>
- <!--  <mt-tab-item id="5">新闻</mt-tab-item> -->
+      <mt-tab-item id="4">讨论区</mt-tab-item>
+      <mt-tab-item id="5">新闻</mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
@@ -52,6 +51,7 @@
 
       <mt-tab-container-item id="2" class="detaildiv tabheight">
           <p>价格趋势</p>
+          <div id="main" style="width: 100%;height: 400px;"></div>
       </mt-tab-container-item>
 
       <mt-tab-container-item id="3" class="detaildiv tabheight">
@@ -82,7 +82,6 @@
           </div>
       </mt-tab-container-item>
     </mt-tab-container>
-    <div id="main" style="width: 100%;height: 400px;"></div>
   </div>
 </template>
 
@@ -95,16 +94,16 @@ import echarts from "echarts";
 export default {
   name: "Detail",
   data: () => ({
-    tabindex: "1",
+    tabindex: "2",
     transList: [],
     commentsList: [],
-    newsList: [],
+    newsList: [1,1,1,1,1],
     sakeinfo: {},
     sakeinfoowner: {},
-    return :{
+    chartsdata: {
       charts: "",
-      opinion: ["白酒", "某某", "某偶爱", "balaba", "某某"],
-      opinionData: [420, 332, 901, 934, 1290, 1330, 1320]
+      opinion: [],
+      opinionData: []
     }
   }),
   components: {
@@ -141,6 +140,14 @@ export default {
       .then(response => {
         if (response.body.statusCode == 200) {
           this.transList = response.body.result;
+          this.chartsdata.opinionData = this.transList.map(function(value){
+          　　return value.price;
+          })
+          this.chartsdata.opinionData = this.chartsdata.opinionData.reverse()
+          this.chartsdata.opinion = this.transList.map(function(value){
+          　　return "";
+          })
+          this.drawPie("main");
         }
       });
   },
@@ -192,13 +199,10 @@ export default {
 drawPie(id) {
       this.charts = echarts.init(document.getElementById(id));
       this.charts.setOption({
-        title: {
-          text: "任意标题"
-        },
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: this.opinion
+          data: this.chartsdata.opinion
         },
         yAxis: {
           type: "value"
@@ -208,7 +212,7 @@ drawPie(id) {
         },
         series: [
           {
-            data: this.opinionData,
+            data: this.chartsdata.opinionData,
             type: "line",
             areaStyle: {}
           }
@@ -219,7 +223,7 @@ drawPie(id) {
   //调用
   mounted() {
     this.$nextTick(function() {
-      this.drawPie("main");
+      // this.drawPie("main");
     });
   }
 
