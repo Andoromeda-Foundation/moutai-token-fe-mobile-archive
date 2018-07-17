@@ -1,7 +1,7 @@
 <template>
     <div id="comment-list">
         <mt-cell class="cell" title="讨论区">
-            <mt-button class="button" type="default" size="small">发表评论</mt-button>
+            <mt-button class="button" type="default" size="small" @click="sendComment()">发表评论</mt-button>
         </mt-cell>
 
         <div class="comment" v-for="item in comments" :key="item.username">
@@ -9,13 +9,13 @@
                 <img :src="item.avatar" style="width: 30px; height: 30px; border-radius:50%;"/>
               </div>
               <div class="commit">
-                <div class="content"> {{item.username}}</div>
+                <div class="content"> {{item.user.nickname}}</div>
                 <div style="width: 100%; height: 10px;" />
                 <div class="content" style="width: calc(100% - 20px);">
                   {{item.content}}
                 </div>
                 <div style="width: 100%; height: 10px;" />
-                <div class="content"> {{item.datetime}} </div>
+                <div class="content"> {{item.updatedAt}} </div>
               </div>
             <div class="lineslim"></div>
           </div>
@@ -24,6 +24,8 @@
 
 <script>
 import { mapState } from "vuex";
+import { Toast, MessageBox } from "mint-ui";
+import config from "../../api/service";
 
 export default {
   name: "CommentComponent",
@@ -37,10 +39,19 @@ export default {
   },
   methods: {
     sendComment() {
-      // 获取商品 ID 和 用户的 token
-      const {goodId, token} = this;
-
-      // 代码填空，发生请求 etc.
+      MessageBox.prompt('Please tell me your name').then(({ value, action }) => {
+        if(action == "confirm") {
+          console.log(action);
+          const formData = {'content':value};
+          this.$http.post(`${config.baseUrl.production}/spirits/${this.$route.params.id}/message`, formData, {
+            headers: { token: this.token }
+          })
+            .then((response) => {
+              const res = response.body;
+              Toast("评论成功，刷新页面即可看到");
+            });
+        }
+      });
     }
   }
 };

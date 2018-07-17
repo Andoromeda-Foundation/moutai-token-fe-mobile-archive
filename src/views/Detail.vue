@@ -57,11 +57,11 @@
       </mt-tab-container-item>
       
       <mt-tab-container-item id="5" class="detaildiv tabheight">
-          <p class="title is-6">新闻</p>
+          <p>新闻</p>
           <div class="" v-for="item in newsList">
-            <div class="content" style="width: calc(100% - 20px);">贵州茅台吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦。这是Qtum量子链钱包的“概览”界面，也是启动之后的默认界面，可以看到下面这些信息。</div>
+            <div class="content" style="width: calc(100% - 20px);">{{ item.title }}</div>
             <div style="width: 100%; height: 10px;" />
-            <div class="detail" style="margin-bottom: 10px;">2017/07/01 01:12</div>
+            <div class="detail" style="margin-bottom: 10px;">{{ item.updatedAt }}</div>
             <div class="lineslim"></div>
           </div>
       </mt-tab-container-item>
@@ -97,10 +97,10 @@ export default {
         logo: "/assets/images/customer.png"
       }
     ],
-    tabindex: "2",
+    tabindex: "1",
     transList: [],
     commentsList: [],
-    newsList: [1,1,1,1,1],
+    newsList: [],
     sakeinfo: {},
     sakeinfoowner: {},
     chartsdata: {
@@ -120,19 +120,28 @@ export default {
     goodId() {return this.$route.params.id}
   },
   created() {
-    // 详细 fetch 评论的逻辑写到 fetchComments()
-    this.commentsList = this.fetchComments()
     this.$http
       .get(`${config.baseUrl.production}/spirits/${this.$route.params.id}`, {
         headers: { token: this.token }
       })
       .then(response => {
         if (response.body.statusCode == 200) {
+          console.log(response.body.result)
           var data = response.body.result;
           data.coverFileDownloadUrl =
             `${config.baseUrl.imageUrl}` + data.coverFileDownloadUrl;
           this.sakeinfo = data;
           this.sakeinfoowner = this.sakeinfo.user;
+        }
+      });
+    
+    this.$http
+      .get(`${config.baseUrl.production}/spirits/${this.$route.params.id}/news`, {
+        headers: { token: this.token }
+      })
+      .then(response => {
+        if (response.body.statusCode == 200) {
+          this.newsList = response.body.result;
         }
       });
 
@@ -154,25 +163,18 @@ export default {
           this.drawPie("main");
         }
       });
+
+      this.$http
+      .get(`${config.baseUrl.production}/spirits/${this.$route.params.id}/message`, {
+        headers: { token: this.token }
+      })
+      .then(response => {
+        if (response.body.statusCode == 200) {
+          this.commentsList = response.body.result;
+        }
+      });
   },
   methods: {
-    fetchComments() {
-      // 这里执行 API 操作,暂时用假数据顶替
-      return [{
-        username: "李田所",
-        avatar:
-          "https://ws4.sinaimg.cn/large/006tKfTcgy1ftbysij511j3098098mx5.jpg",
-        content: "是homo就干这一杯",
-        datetime: "1919-08-10"
-      },
-      {
-        username: "王道往",
-        avatar:
-          "https://ws4.sinaimg.cn/large/006tKfTcgy1ftbysij511j3098098mx5.jpg",
-        content: "114514",
-        datetime: "1919-08-10"
-      }]
-    },
     buySake(index) {
       if (!this.token) {
         MessageBox("提示", "请先登录");
