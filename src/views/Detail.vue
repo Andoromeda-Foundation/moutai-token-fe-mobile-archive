@@ -1,20 +1,26 @@
 <template>
   <div class="Detail-view">
-
-    <mt-tabbar
+    <GeneralTabBar :menus="menus">
+      <mt-tab-item id="" @click.native="menuTab('')">
+        <mt-button type="primary">立即认购</mt-button>
+      </mt-tab-item>
+    </GeneralTabBar>
+    <!-- <mt-tabbar
     :fixed="true">
       <mt-tab-item id="主页" @click.native="menuTab('/')">
-        <img slot="icon" src="../assets/images/home.png">
+        <img slot="icon" src="/assets/images/home.png">
         主页
       </mt-tab-item>
       <mt-tab-item id="客服" @click.native="menuTab('')">
-        <img slot="icon" src="../assets/images/customer.png">
+        <img slot="icon" src="/assets/images/customer.png">
         客服
       </mt-tab-item>
       <mt-tab-item id="" @click.native="menuTab('')">
         <mt-button type="primary">立即认购</mt-button>
       </mt-tab-item>
-    </mt-tabbar>
+    </mt-tabbar> -->
+
+
 
     <mt-navbar v-model="tabindex">
       <mt-tab-item id="1">商品</mt-tab-item>
@@ -90,10 +96,24 @@ import config from "../api/service";
 import { mapGetters } from "vuex";
 import { Toast, MessageBox } from "mint-ui";
 import Comment from "../components/Detail/Comment";
+import GeneralTabBar from "../components/GeneralTabBar";
+
 import echarts from "echarts";
 export default {
   name: "Detail",
   data: () => ({
+    menus: [
+      {
+        name: '主页',
+        location: '/',
+        logo: "/assets/images/home.png"
+      },
+      {
+        name: '客服',
+        location: '',
+        logo: "/assets/images/customer.png"
+      }
+    ],
     tabindex: "2",
     transList: [],
     commentsList: [],
@@ -109,6 +129,7 @@ export default {
   components: {
     MessageBox,
     Toast,
+    GeneralTabBar,
     Comment
   },
   computed: {

@@ -1,11 +1,12 @@
 <template>
-  <div class="footer">
+  <div class="tab-bar">
     <mt-tabbar v-model="selected"
     :fixed="true">
       <mt-tab-item v-for="menu in menus" :key="menu.name" id="menu.name" @click.native="menuTab(menu.location)">
         <img slot="icon" :src="menu.logo">
         {{menu.name}}
       </mt-tab-item>
+      <slot></slot>
     </mt-tabbar>
   </div>
 </template>

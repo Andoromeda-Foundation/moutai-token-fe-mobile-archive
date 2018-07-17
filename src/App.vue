@@ -12,7 +12,7 @@
     <mt-cell v-for="n in 7" :key="n" title="tab-container 3"></mt-cell>
   </mt-tab-container-item>
     </mt-tab-container>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
