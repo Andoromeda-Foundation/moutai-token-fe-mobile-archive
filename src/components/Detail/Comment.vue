@@ -39,7 +39,12 @@ export default {
   },
   methods: {
     sendComment() {
-      MessageBox.prompt('Please tell me your name').then(({ value, action }) => {
+      if (this.token === "") {
+        MessageBox("提示", "请先登录");
+        this.$router.push("/Login");
+        return;
+      }
+      MessageBox.prompt('请输入你的评论：').then(({ value, action }) => {
         if(action == "confirm") {
           console.log(action);
           const formData = {'content':value};
